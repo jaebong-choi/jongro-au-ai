@@ -8,7 +8,9 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -25,8 +27,8 @@
                         'apple-gray-btn': '#fafafc'
                     },
                     fontFamily: {
-                        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Text"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
-                        display: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+                        sans: ['"Noto Sans KR"', '-apple-system', 'BlinkMacSystemFont', 'Helvetica', 'Arial', 'sans-serif'],
+                        display: ['"Noto Sans KR"', '-apple-system', 'BlinkMacSystemFont', 'Helvetica', 'Arial', 'sans-serif'],
                     }
                 }
             }
@@ -35,6 +37,7 @@
 
     <style>
         body {
+            font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
             background-color: #000000;
             color: #f5f5f7;
             -webkit-font-smoothing: antialiased;
@@ -44,11 +47,11 @@
             overflow-x: hidden;
         }
 
-        /* Apple Typography Rules */
-        .sf-display-hero { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif; font-size: 56px; font-weight: 600; line-height: 1.07; letter-spacing: -0.28px; }
-        .sf-display-section { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif; font-size: 40px; font-weight: 600; line-height: 1.10; letter-spacing: -0.15px; }
-        .sf-display-card { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif; font-size: 28px; font-weight: 400; line-height: 1.14; letter-spacing: 0.196px; }
-        .sf-display-card-bold { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif; font-size: 21px; font-weight: 700; line-height: 1.19; letter-spacing: 0.231px; }
+        /* Typography Rules (Noto Sans KR) */
+        .sf-display-hero { font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif; font-size: 56px; font-weight: 700; line-height: 1.15; letter-spacing: -0.28px; }
+        .sf-display-section { font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif; font-size: 40px; font-weight: 700; line-height: 1.18; letter-spacing: -0.15px; }
+        .sf-display-card { font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif; font-size: 28px; font-weight: 400; line-height: 1.25; letter-spacing: 0.196px; }
+        .sf-display-card-bold { font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif; font-size: 21px; font-weight: 700; line-height: 1.3; letter-spacing: 0.231px; }
         .sf-text-body { font-size: 17px; font-weight: 400; line-height: 1.47; letter-spacing: -0.374px; }
         .sf-text-caption { font-size: 14px; font-weight: 400; line-height: 1.43; letter-spacing: -0.224px; }
 
@@ -357,13 +360,14 @@
                 Pathway Description
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <button onclick="downloadPDF()" class="apple-btn-primary">
-                    리포트 PDF 저장
+                <button id="share-btn" onclick="copyResultLink()" class="apple-btn-primary">
+                    <i class="fa-solid fa-link text-xs mr-2"></i> 결과 링크 복사
                 </button>
-                <button onclick="location.reload()" class="apple-link-pill">
+                <button onclick="resetConsulting()" class="apple-link-pill">
                     다시 진단하기 <i class="fa-solid fa-rotate-right text-xs ml-2"></i>
                 </button>
             </div>
+            <p id="share-hint" class="sf-text-caption text-gray-500 mt-5">링크를 복사해 카카오톡·문자로 전달하면 같은 결과 페이지가 열립니다.</p>
         </div>
     </div>
 
@@ -400,21 +404,22 @@
                 <!-- University Cards Injected Here -->
             </div>
 
-            <!-- Banner for Chongro Board -->
-            <a href="https://www.coei.com/uhak-info/rc/au" target="_blank" class="info-banner p-10 mb-24 group transition-transform duration-300 hover:scale-[1.01]">
-                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div class="text-center md:text-left">
-                        <p class="sf-text-caption text-[#2997ff] font-semibold uppercase tracking-wider mb-2">Resource Center</p>
-                        <h4 class="sf-display-card text-white mb-2">종로유학원 호주 대학진학 정보 게시판</h4>
-                        <p class="sf-text-body text-gray-400">간호 GE·석사 과정 비교, 검정고시 명문대 진학, 장학금·비자 최신 소식을 확인하세요.</p>
-                    </div>
-                    <div>
-                        <span class="apple-btn-primary bg-white text-[#1d1d1f] hover:bg-gray-200">
-                            바로가기 <i class="fa-solid fa-arrow-right text-xs ml-2"></i>
-                        </span>
-                    </div>
+            <!-- Matched Board Articles -->
+            <div class="info-banner p-10 mb-24">
+                <div class="text-center md:text-left mb-8">
+                    <p class="sf-text-caption text-[#2997ff] font-semibold uppercase tracking-wider mb-2">Resource Center</p>
+                    <h4 class="sf-display-card text-white mb-2" id="board-section-title">내 진단 결과에 맞는 유학 정보</h4>
+                    <p class="sf-text-body text-gray-400">종로유학원 호주 대학진학 게시판에서 진단 결과와 가장 관련 있는 글을 골라 드렸습니다.</p>
                 </div>
-            </a>
+                <div id="board-articles" class="space-y-3 mb-8">
+                    <!-- Matched article links injected via JS -->
+                </div>
+                <div class="text-center md:text-left">
+                    <a href="https://www.coei.com/uhak-info/rc/au" target="_blank" class="apple-btn-primary bg-white text-[#1d1d1f] hover:bg-gray-200">
+                        호주 유학 정보 게시판 전체 보기 <i class="fa-solid fa-arrow-right text-xs ml-2"></i>
+                    </a>
+                </div>
+            </div>
 
             <!-- Next Steps & Info -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
@@ -476,6 +481,16 @@
                     { name: "Monash University", state: "VIC", degree: "Master of Nursing Practice (간호실무 석사)", rank: "Go8 명문 · 멜버른", req: "학사 학위 + 선수과목", ielts: "7.0", tuition: "AUD $52,000", url: "https://www.monash.edu/medicine/nursing" },
                     { name: "QUT", state: "QLD", degree: "Master of Nursing - Graduate Entry (간호학 석사)", rank: "퀸즐랜드 간호 명문", req: "학사 학위 (비전공 지원 가능)", ielts: "7.0", tuition: "AUD $44,000", url: "https://www.qut.edu.au/study/nursing" }
                 ],
+                boards: [
+                    { id: 131, title: "호주 간호학과 총정리 | 디플로마 편입부터 GE/석사 리스트까지" },
+                    { id: 61, title: "호주 간호학과 디플로마 가이드 | 대학교 리스트 및 편입 방법 총정리" },
+                    { id: 32, title: "호주 간호학과 선택 가이드 | AHPRA 기준·학비·지방지역 혜택 한눈에 정리" }
+                ],
+                masterBoards: [
+                    { id: 55, title: "호주 간호 GE과정·석사 과정 비교 | 2026-2027 최신업데이트" },
+                    { id: 400, title: "선수과목 없이 비전공자를 위한 간호학 GE 및 석사 입학 총정리" },
+                    { id: 59, title: "호주 간호 GE & 석사 과정 | 7월 입학 가능한 리스트" }
+                ],
                 videoId: "Ibm0rNLaOxg",
                 videoTitle: "🇦🇺 호주 유학 준비, 늦기 전에 확인해야 할 입학 조건"
             },
@@ -491,6 +506,16 @@
                     { name: "University of Sydney", state: "NSW", degree: "Master of Pharmacy (약학 석사 2년)", rank: "QS 세계 20위권", req: "관련 학사 (화학·생물 이수)", ielts: "7.0", tuition: "AUD $62,000", url: "https://www.sydney.edu.au/medicine-health/schools/sydney-pharmacy-school.html" },
                     { name: "Monash University", state: "VIC", degree: "Master of Pharmaceutical Science (제약과학 석사)", rank: "QS 세계 2위 (약학)", req: "이공계 학사", ielts: "6.5", tuition: "AUD $53,000", url: "https://www.monash.edu/pharm" },
                     { name: "Griffith University", state: "QLD", degree: "Master of Pharmacy (약학 석사)", rank: "QS 151-200위", req: "관련 학사 + GPA 요건", ielts: "6.5", tuition: "AUD $46,000", url: "https://www.griffith.edu.au/study/pharmacy" }
+                ],
+                boards: [
+                    { id: 60, title: "호주 약대 | 주요대학교 입학 경로 및 2026 입학 조건" },
+                    { id: 5, title: "호주 약대 수능점수로 입학가능! 한국약사면허 & 호주영주권도 가능!" },
+                    { id: 277, title: "호주 약대 입학 정보 총정리 (보건복지부장관 인증 리스트)" }
+                ],
+                masterBoards: [
+                    { id: 45, title: "호주 모나쉬대학교 약대 GE 3년과정 입학 가능할까요?" },
+                    { id: 329, title: "전 세계 약학 분야 순위 4위 | 모나쉬 대학교 약대 완벽 분석" },
+                    { id: 38, title: "시드니대학교 약대 최신정보 | 2027년 입학지원 가능!" }
                 ],
                 videoId: "Ibm0rNLaOxg",
                 videoTitle: "🇦🇺 호주 유학 준비, 늦기 전에 확인해야 할 입학 조건"
@@ -508,6 +533,16 @@
                     { name: "Monash University", state: "VIC", degree: "Master of Information Technology (정보기술 석사)", rank: "Go8 명문대", req: "학사 학위 (전공 무관)", ielts: "6.5", tuition: "AUD $53,000", url: "https://www.monash.edu/it" },
                     { name: "QUT", state: "QLD", degree: "Master of Information Technology (정보기술 석사)", rank: "실무 중심 · 브리즈번", req: "학사 학위 (전공 무관)", ielts: "6.5", tuition: "AUD $42,000", url: "https://www.qut.edu.au/study/information-technology" }
                 ],
+                boards: [
+                    { id: 138, title: "퀸즐랜드 공과대학교 | IT 학과 입학 총정리" },
+                    { id: 209, title: "시드니 대학교 IT 입학 전략! Bachelor of Advanced Computing" },
+                    { id: 415, title: "모나쉬 대학교 IT & 컴퓨터공학 11월 입학 시 첫 학기 기숙사 무료" }
+                ],
+                masterBoards: [
+                    { id: 52, title: "호주 명문대 IT 석사 학비와 졸업 후 영주권 루트 총정리" },
+                    { id: 66, title: "호주 AI 석사 과정 완벽 정리 | 비전공자도 가능한 유학 후 이민 전략" },
+                    { id: 8, title: "호주 AI 석사 유학 - 왜 선택할까? 비전공자도 쉽게 입학가능!" }
+                ],
                 videoId: "3zjufz-HyfY",
                 videoTitle: "🇦🇺호주 가기 일주일 전… 오리엔테이션에서 뭘 할까?"
             },
@@ -523,6 +558,16 @@
                     { name: "UNSW", state: "NSW", degree: "Master of Engineering (공학 석사, EA 인증)", rank: "호주 공대 1위 수준", req: "공학 계열 학사", ielts: "6.5", tuition: "AUD $56,000", url: "https://www.unsw.edu.au/engineering" },
                     { name: "University of Melbourne", state: "VIC", degree: "Master of Engineering (공학 석사)", rank: "QS 세계 10위권", req: "이공계 학사 (비전공 트랙 有)", ielts: "6.5", tuition: "AUD $58,000", url: "https://study.unimelb.edu.au/find/courses/graduate/master-of-engineering/" },
                     { name: "University of Queensland", state: "QLD", degree: "Master of Engineering (공학 석사)", rank: "Go8 · 브리즈번", req: "공학 계열 학사 + GPA", ielts: "6.5", tuition: "AUD $52,000", url: "https://study.uq.edu.au/study-options/programs/master-engineering-5619" }
+                ],
+                boards: [
+                    { id: 53, title: "호주 토목공학과(Civil Engineering) 전공·과정·추천대학·영주권 루트 총정리" },
+                    { id: 136, title: "QUT 엔지니어링학과 학사·석사 | 2026 전공별 분석 및 영주권 전략" },
+                    { id: 50, title: "수능점수로 바로 입학가능한 호주건축학과! 포트폴리오도 요구없음!" }
+                ],
+                masterBoards: [
+                    { id: 136, title: "QUT 엔지니어링학과 학사·석사 | 2026 전공별 분석 및 영주권 전략" },
+                    { id: 53, title: "호주 토목공학과(Civil Engineering) 전공·과정·추천대학·영주권 루트 총정리" },
+                    { id: 147, title: "호주 유학 후 이민 | 점수제 기술이민과 취업비자 그리고 영주권" }
                 ],
                 videoId: "3zjufz-HyfY",
                 videoTitle: "🇦🇺호주 가기 일주일 전… 오리엔테이션에서 뭘 할까?"
@@ -540,6 +585,16 @@
                     { name: "University of Queensland", state: "QLD", degree: "Doctor of Medicine (MD, 4년)", rank: "Go8 의학 명문", req: "학사 + GAMSAT/MCAT", ielts: "7.0", tuition: "AUD $94,000", url: "https://medicine-program.uq.edu.au/" },
                     { name: "University of Sydney", state: "NSW", degree: "Doctor of Medicine (MD, 4년)", rank: "QS 세계 20위권", req: "학사 + GAMSAT + 인터뷰", ielts: "7.0", tuition: "AUD $98,000", url: "https://www.sydney.edu.au/medicine-health/" }
                 ],
+                boards: [
+                    { id: 379, title: "호주 파운데이션을 통한 의대·치대·수의대 입학 전략" },
+                    { id: 195, title: "호주 의대 입시 | ISAT vs UCAT ANZ 전격 비교분석" },
+                    { id: 9, title: "호주 의대 진학방법, 의예과 Biomedical Science 추천 이유!" }
+                ],
+                masterBoards: [
+                    { id: 56, title: "호주 의대 | 의예과를 통해 의전원(MD)을 준비하는게 더 현실적인 이유!" },
+                    { id: 195, title: "호주 의대 입시 | ISAT vs UCAT ANZ 전격 비교분석" },
+                    { id: 100, title: "뉴캐슬대학교 의대 진학부터 영주권까지, 호주 유학의 마스터키" }
+                ],
                 videoId: "Ibm0rNLaOxg",
                 videoTitle: "🇦🇺 호주 유학 준비, 늦기 전에 확인해야 할 입학 조건"
             },
@@ -554,6 +609,16 @@
                     { name: "Griffith University", state: "QLD", degree: "Master of International Tourism and Hospitality Management (국제관광호스피탈리티 석사)", rank: "호주 호텔경영 1위", req: "학사 학위 (전공 무관)", ielts: "6.5", tuition: "AUD $41,000", url: "https://www.griffith.edu.au/study/tourism-hospitality" },
                     { name: "Blue Mountains (BMIHMS)", state: "NSW", degree: "Master of International Hotel Leadership (국제호텔리더십 석사)", rank: "호주 호텔스쿨 명성 1위", req: "학사 또는 관련 경력", ielts: "6.5", tuition: "AUD $39,000", url: "https://www.bluemountains.edu.au/" },
                     { name: "The Hotel School", state: "NSW", degree: "Master of Business in Global Hotel Leadership (글로벌호텔리더십 석사)", rank: "유급 인턴십 최강", req: "학사 학위 (전공 무관)", ielts: "6.5", tuition: "AUD $37,000", url: "https://hotelschool.scu.edu.au/" }
+                ],
+                boards: [
+                    { id: 197, title: "호주 그리피스대학교 호텔경영학과 | 수능 입학부터 디플로마 편입까지" },
+                    { id: 7, title: "호주 호텔경영학과 3년만에 졸업! 연봉은 한국보다 2배?!" },
+                    { id: 403, title: "서던크로스대학교 호텔경영학과 졸업 후 영주권 가능!" }
+                ],
+                masterBoards: [
+                    { id: 403, title: "서던크로스대학교 호텔경영학과 졸업 후 영주권 가능!" },
+                    { id: 63, title: "호주 호텔경영학과 | 호텔리어는 해외취업이 답이다!" },
+                    { id: 14, title: "저렴한 학비로 학사, 석사, MBA 취득 가능! 호주 카플란 비지니스 스쿨!" }
                 ],
                 videoId: "v1kETCCZFtE",
                 videoTitle: "영어도 배우고, 알바까지 호주로 어학연수 고고!!"
@@ -809,6 +874,7 @@
         // Report
         // ============================================================
         function generateReport() {
+            document.getElementById('hero-section').classList.add('hidden');
             document.getElementById('consulting-section').classList.add('hidden');
             document.getElementById('result-hero').classList.remove('hidden');
             document.getElementById('result-details').classList.remove('hidden');
@@ -909,30 +975,79 @@
                 `;
             }
 
+            // Matched board articles (학부/석사별)
+            const boardBase = "https://www.coei.com/uhak-info/rc/au/";
+            const articles = (isMaster && majorInfo.masterBoards) ? majorInfo.masterBoards : (majorInfo.boards || []);
+            const boardWrap = document.getElementById('board-articles');
+            document.getElementById('board-section-title').innerText =
+                userProfile.major.split('(')[0].trim() + (isMaster ? " 석사" : " 학부") + " 맞춤 유학 정보";
+            boardWrap.innerHTML = articles.map(a => `
+                <a href="${boardBase}${a.id}" target="_blank"
+                   class="flex items-center justify-between gap-4 bg-[#1d1d1f] hover:bg-[#333336] border border-[#3a3a3c] rounded-xl px-6 py-4 transition group">
+                    <span class="sf-text-body text-gray-200 group-hover:text-white text-left">
+                        <i class="fa-regular fa-file-lines text-[#2997ff] mr-3"></i>${a.title}
+                    </span>
+                    <i class="fa-solid fa-arrow-right text-[#2997ff] text-sm shrink-0 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            `).join('');
+
             // Populate YouTube
             document.getElementById('yt-title').innerText = majorInfo.videoTitle;
             document.getElementById('yt-thumb').src = `https://img.youtube.com/vi/${majorInfo.videoId}/maxresdefault.jpg`;
             document.getElementById('yt-link').href = `https://www.youtube.com/watch?v=${majorInfo.videoId}`;
+
+            // 결과 공유용 해시 갱신 (주소창 URL 자체가 공유 링크가 된다)
+            history.replaceState(null, '', '#p=' + encodeURIComponent(JSON.stringify(userProfile)));
         }
 
-        function downloadPDF() {
-            const element = document.getElementById('pdf-content');
-            const opt = {
-                margin:       [10, 10, 10, 10],
-                filename:     '종로유학원_호주유학_AI리포트.pdf',
-                image:        { type: 'jpeg', quality: 1.0 },
-                html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#f5f5f7' },
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        // ============================================================
+        // 결과 링크 공유 / 복원
+        // ============================================================
+        function buildResultLink() {
+            return location.origin + location.pathname + '#p=' + encodeURIComponent(JSON.stringify(userProfile));
+        }
+
+        function copyResultLink() {
+            const link = buildResultLink();
+            const btn = document.getElementById('share-btn');
+            const done = () => {
+                const original = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-check text-xs mr-2"></i> 복사 완료!';
+                setTimeout(() => { btn.innerHTML = original; }, 2000);
             };
-
-            const btn = event.currentTarget;
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '저장 중...';
-
-            html2pdf().set(opt).from(element).save().then(() => {
-                btn.innerHTML = originalText;
-            });
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(link).then(done).catch(() => fallbackCopy(link, done));
+            } else {
+                fallbackCopy(link, done);
+            }
         }
+
+        function fallbackCopy(text, done) {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); done(); } catch (e) { prompt('아래 링크를 복사하세요:', text); }
+            document.body.removeChild(ta);
+        }
+
+        function resetConsulting() {
+            history.replaceState(null, '', location.pathname);
+            location.reload();
+        }
+
+        // 공유 링크로 접속 시 결과 페이지 즉시 복원
+        (function restoreFromHash() {
+            if (!location.hash.startsWith('#p=')) return;
+            try {
+                const data = JSON.parse(decodeURIComponent(location.hash.slice(3)));
+                if (!data || !data.major || !majorData[data.major]) return;
+                userProfile = Object.assign(userProfile, data);
+                document.addEventListener('DOMContentLoaded', generateReport);
+            } catch (e) { /* 잘못된 링크는 무시하고 히어로 표시 */ }
+        })();
     </script>
 </body>
 </html>

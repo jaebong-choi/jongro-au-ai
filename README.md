@@ -9,12 +9,12 @@
 - **세분화된 프로필 질문** — 영어 시험(IELTS/PTE/TOEFL) 점수대, 학부는 내신·수능, 석사는 학사 학점
 - **지역 기반 추천** — 선호 지역 대학을 우선 정렬하고 "선호 지역 일치" 배지 표시
 - **패스웨이 로직** — Direct Entry / Diploma Transfer / Foundation / GE / Graduate Certificate 등 자동 판정
-- **PDF 리포트 저장** — html2pdf.js 기반 진단 결과 다운로드
-- [종로유학원 호주 대학진학 정보 게시판](https://www.coei.com/uhak-info/rc/au) 연동 배너
+- **맞춤 게시판 아티클** — [종로유학원 호주 대학진학 게시판](https://www.coei.com/uhak-info/rc/au)(191개 글)에서 전공×트랙별로 가장 관련 있는 글 3개를 골라 결과 페이지에 표시
+- **결과 링크 공유** — 진단 결과가 URL 해시에 인코딩되어, 링크를 복사·전달하면 동일한 결과 페이지가 바로 열림
 
 ## 기술 스택
 
-- 단일 `index.html` (정적 페이지) — Tailwind CDN, Font Awesome, html2pdf.js
+- 단일 `index.html` (정적 페이지) — Tailwind CDN, Font Awesome, Noto Sans KR
 - GitHub Pages 배포
 
 ## 문의
