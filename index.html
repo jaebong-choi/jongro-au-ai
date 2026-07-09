@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>종로유학원 - 호주 명문대 진학 AI 컨설팅 (학부·석사)</title>
+    <meta name="description" content="수능 6등급도 호주 명문대 합격. 학부·석사 패스웨이를 AI가 진단합니다. 종로유학원 호주 유학 전문 컨설팅.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'apple-black': '#000000',
+                        'apple-dark-surface': '#1d1d1f',
+                        'apple-light': '#f5f5f7',
+                        'apple-white': '#ffffff',
+                        'apple-blue': '#0071e3',
+                        'apple-link': '#0066cc',
+                        'apple-nav': 'rgba(0, 0, 0, 0.8)',
+                        'apple-gray-btn': '#fafafc'
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Text"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+                        display: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #000000;
+            color: #f5f5f7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Apple Typography Rules */
+        .sf-display-hero { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif; font-size: 56px; font-weight: 600; line-height: 1.07; letter-spacing: -0.28px; }
+        .sf-display-section { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif; font-size: 40px; font-weight: 600; line-height: 1.10; letter-spacing: -0.15px; }
+        .sf-display-card { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif; font-size: 28px; font-weight: 400; line-height: 1.14; letter-spacing: 0.196px; }
+        .sf-display-card-bold { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif; font-size: 21px; font-weight: 700; line-height: 1.19; letter-spacing: 0.231px; }
+        .sf-text-body { font-size: 17px; font-weight: 400; line-height: 1.47; letter-spacing: -0.374px; }
+        .sf-text-caption { font-size: 14px; font-weight: 400; line-height: 1.43; letter-spacing: -0.224px; }
+
+        @media (max-width: 768px) {
+            .sf-display-hero { font-size: 38px; line-height: 1.1; }
+            .sf-display-section { font-size: 32px; line-height: 1.12; }
+            .sf-display-card { font-size: 24px; }
+        }
+
+        /* Glassmorphism Navigation */
+        .apple-nav-glass {
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+        }
+
+        /* Hero ambient glow */
+        .hero-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.35;
+            pointer-events: none;
+        }
+        .hero-glow.blue { width: 560px; height: 560px; background: #0a4a8f; top: -140px; left: 50%; transform: translateX(-70%); animation: drift 14s ease-in-out infinite alternate; }
+        .hero-glow.violet { width: 420px; height: 420px; background: #3d2b7a; bottom: -80px; right: -60px; animation: drift 18s ease-in-out infinite alternate-reverse; }
+        @keyframes drift { from { transform: translate(0, 0); } to { transform: translate(60px, 40px); } }
+
+        .hero-gradient-text {
+            background: linear-gradient(100deg, #2997ff 0%, #7dc3ff 45%, #b18cff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Rotating hook line */
+        .hook-rotator { min-height: 26px; transition: opacity 0.5s ease; }
+        .hook-rotator.fading { opacity: 0; }
+
+        /* Degree selection cards */
+        .degree-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 20px;
+            padding: 28px 30px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            width: 320px;
+            max-width: 100%;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .degree-card:hover {
+            border-color: #2997ff;
+            background: rgba(41, 151, 255, 0.09);
+            transform: translateY(-4px);
+        }
+        .degree-card:active { transform: translateY(-2px) scale(0.99); }
+        .degree-card .go {
+            color: #2997ff;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* Hero stat chips */
+        .stat-chip {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 980px;
+            padding: 7px 16px;
+            font-size: 13px;
+            color: #d1d1d6;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .stat-chip i { color: #2997ff; font-size: 12px; }
+
+        /* Interactive Elements (Buttons & Links) */
+        .apple-btn-primary {
+            background-color: #0071e3;
+            color: #ffffff;
+            border-radius: 980px;
+            padding: 8px 20px;
+            font-size: 17px;
+            font-weight: 400;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .apple-btn-primary:hover { background-color: #0077ED; }
+        .apple-btn-primary:active { background-color: #ededf2; color: #1d1d1f; }
+        .apple-btn-primary:focus { outline: 2px solid #0071e3; outline-offset: 2px; }
+
+        .apple-link-pill {
+            background-color: transparent;
+            color: #2997ff;
+            border-radius: 980px;
+            padding: 8px 20px;
+            font-size: 17px;
+            border: 1px solid #2997ff;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .apple-link-pill:hover { background-color: rgba(41, 151, 255, 0.1); text-decoration: underline; }
+        .apple-link-pill.light-bg { color: #0066cc; border-color: #0066cc; }
+        .apple-link-pill.light-bg:hover { background-color: rgba(0, 102, 204, 0.1); }
+
+        /* Questionnaire Options */
+        .option-card {
+            background-color: #fafafc;
+            color: rgba(0, 0, 0, 0.8);
+            border-radius: 11px;
+            padding: 16px 24px;
+            font-size: 17px;
+            font-weight: 400;
+            border: 3px solid rgba(0, 0, 0, 0.04);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 64px;
+        }
+        .option-card:hover {
+            border-color: rgba(0, 113, 227, 0.3);
+            background-color: #ffffff;
+        }
+        .option-card:active {
+            transform: scale(0.98);
+        }
+
+        /* Degree track chip inside questionnaire */
+        .track-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0, 113, 227, 0.08);
+            color: #0071e3;
+            border-radius: 980px;
+            padding: 5px 14px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* Result Cards */
+        .apple-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: rgba(0, 0, 0, 0.22) 3px 5px 30px 0px;
+            transition: transform 0.3s ease;
+        }
+        .apple-card-flat {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        /* Region match badge */
+        .region-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(52, 199, 89, 0.12);
+            color: #1a7f37;
+            border-radius: 980px;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* Banner Design */
+        .info-banner {
+            background-color: #272729;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            display: block;
+        }
+
+        /* Logo Filter */
+        .nav-logo { filter: brightness(0) invert(1); opacity: 0.9; }
+
+        /* Animations */
+        .fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed top-0 w-full z-50 apple-nav-glass h-12 flex items-center">
+        <div class="max-w-[980px] mx-auto w-full px-4 flex justify-between items-center text-xs sf-text-caption text-gray-300">
+            <a href="#" class="hover:text-white transition flex items-center">
+                <img src="https://www.coei.com/image/logo.svg" alt="종로유학원" class="h-4 nav-logo">
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#" class="hover:text-white transition">Australia</a>
+                <a href="#" class="hover:text-white transition">Bachelor</a>
+                <a href="#" class="hover:text-white transition">Master</a>
+                <a href="https://www.coei.com/uhak-info/rc/au" target="_blank" class="hover:text-white transition">유학 정보</a>
+            </div>
+            <a href="tel:1577-5682" class="hover:text-white transition"><i class="fa-solid fa-phone"></i> 1577-5682</a>
+        </div>
+    </nav>
+
+    <!-- ===================== HERO ===================== -->
+    <div id="hero-section" class="min-h-screen bg-apple-black flex flex-col justify-center items-center text-center px-4 pt-24 pb-16 relative z-10 transition-opacity duration-500 overflow-hidden">
+        <div class="hero-glow blue"></div>
+        <div class="hero-glow violet"></div>
+
+        <p class="sf-text-body text-gray-400 mb-5 fade-in-up tracking-widest uppercase text-xs relative">Chongro Overseas Educational Institute</p>
+
+        <h1 class="sf-display-hero text-apple-white mb-4 fade-in-up delay-100 max-w-4xl relative">
+            수능 6등급,<br><span class="hero-gradient-text">호주 명문대 합격.</span>
+        </h1>
+        <p class="sf-display-card text-gray-200 mb-6 fade-in-up delay-200 relative" style="font-weight: 500;">
+            내신은 숫자일 뿐, 경로가 전부다.
+        </p>
+
+        <p id="hook-rotator" class="hook-rotator sf-text-body text-[#2997ff] mb-8 fade-in-up delay-200 relative max-w-2xl">
+            성적이 좋아야 명문대에 간다? 호주는 패스웨이가 성적을 이깁니다.
+        </p>
+
+        <p class="sf-text-body text-gray-300 max-w-2xl mx-auto mb-10 fade-in-up delay-300 relative">
+            학점, 영어 성적, 희망 전공과 지역 데이터를 분석하여 글로벌 커리어와 영주권 취득을 위한
+            <strong class="text-white">최적의 호주 학부·석사 진학 경로</strong>를 제시합니다.
+        </p>
+
+        <!-- 학부 / 석사 선택 -->
+        <div class="flex flex-col sm:flex-row gap-5 fade-in-up delay-300 relative mb-10">
+            <button onclick="startConsulting('학부 (Bachelor)')" class="degree-card">
+                <div class="flex items-center justify-between mb-3">
+                    <i class="fa-solid fa-graduation-cap text-2xl text-[#2997ff]"></i>
+                    <span class="go">진단 시작 <i class="fa-solid fa-arrow-right text-xs"></i></span>
+                </div>
+                <h3 class="sf-display-card-bold text-white mb-1">학부 진학 (Bachelor)</h3>
+                <p class="sf-text-caption text-gray-400">고교 졸업(예정) · 검정고시 · 대학 재학/휴학생.<br>디플로마·파운데이션으로 명문대 편입까지.</p>
+            </button>
+            <button onclick="startConsulting('석사 (Master)')" class="degree-card">
+                <div class="flex items-center justify-between mb-3">
+                    <i class="fa-solid fa-user-tie text-2xl text-[#b18cff]"></i>
+                    <span class="go">진단 시작 <i class="fa-solid fa-arrow-right text-xs"></i></span>
+                </div>
+                <h3 class="sf-display-card-bold text-white mb-1">석사 진학 (Master)</h3>
+                <p class="sf-text-caption text-gray-400">대학 졸업(예정)자 · 직장인 커리어 전환.<br>비전공자 GE 과정으로 전문직 면허까지.</p>
+            </button>
+        </div>
+
+        <!-- 신뢰 지표 -->
+        <div class="flex flex-wrap justify-center gap-3 fade-in-up delay-400 relative mb-10">
+            <span class="stat-chip"><i class="fa-solid fa-ranking-star"></i> QS 세계 20위권 파트너 대학</span>
+            <span class="stat-chip"><i class="fa-solid fa-passport"></i> 영주권 연계 전공 설계</span>
+            <span class="stat-chip"><i class="fa-solid fa-user-check"></i> 1:1 무료 AI 진단</span>
+        </div>
+
+        <div class="fade-in-up delay-400 relative">
+            <a href="https://www.coei.com/info/consult/reserve.php" target="_blank" class="apple-link-pill">
+                전문가 상담 예약 <i class="fa-solid fa-chevron-right text-xs ml-2"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- ===================== QUESTIONNAIRE ===================== -->
+    <div id="consulting-section" class="hidden min-h-screen bg-apple-light text-apple-dark-surface pt-24 pb-20 px-4">
+        <div class="max-w-[980px] mx-auto">
+            <!-- Progress Bar -->
+            <div class="w-full bg-[#e5e5ea] h-1 rounded-full mb-10 overflow-hidden">
+                <div id="progress-bar" class="bg-apple-blue h-1 transition-all duration-500 w-0"></div>
+            </div>
+
+            <div class="text-center mb-6">
+                <span id="track-chip" class="track-chip"><i class="fa-solid fa-graduation-cap"></i> 학부 트랙</span>
+            </div>
+
+            <!-- Question Area -->
+            <div id="question-area" class="min-h-[400px] flex flex-col justify-center">
+                <p class="text-center sf-text-caption text-apple-blue font-semibold mb-2" id="step-indicator">Step 1</p>
+                <h2 id="question-text" class="sf-display-section text-center mb-12 text-[#1d1d1f]">질문을 불러오는 중...</h2>
+                <div id="options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto w-full">
+                    <!-- Options injected via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== RESULT HERO ===================== -->
+    <div id="result-hero" class="hidden bg-apple-black text-apple-white py-32 px-4 text-center">
+        <div class="max-w-[980px] mx-auto fade-in-up">
+            <h2 class="sf-display-section mb-6">분석이 완료되었습니다.</h2>
+            <h3 id="result-pathway-title" class="sf-display-hero text-apple-blue mb-8">Pathway Name</h3>
+            <p id="result-pathway-desc" class="sf-text-body text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed">
+                Pathway Description
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button onclick="downloadPDF()" class="apple-btn-primary">
+                    리포트 PDF 저장
+                </button>
+                <button onclick="location.reload()" class="apple-link-pill">
+                    다시 진단하기 <i class="fa-solid fa-rotate-right text-xs ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== RESULT DETAILS ===================== -->
+    <div id="result-details" class="hidden bg-apple-light text-apple-dark-surface py-24 px-4">
+        <div class="max-w-[980px] mx-auto" id="pdf-content">
+
+            <!-- Profile Summary -->
+            <div class="mb-24 text-center">
+                <h3 class="sf-display-card mb-12">Profile Summary</h3>
+                <div class="flex flex-wrap justify-center gap-8 md:gap-14 sf-text-body">
+                    <div class="flex flex-col items-center"><span class="text-xs uppercase tracking-widest text-gray-500 mb-1">Course</span> <strong class="text-apple-dark-surface" id="sum-degree"></strong></div>
+                    <div class="flex flex-col items-center"><span class="text-xs uppercase tracking-widest text-gray-500 mb-1">Region</span> <strong class="text-apple-dark-surface" id="sum-region"></strong></div>
+                    <div class="flex flex-col items-center"><span class="text-xs uppercase tracking-widest text-gray-500 mb-1">English</span> <strong class="text-apple-dark-surface" id="sum-eng"></strong></div>
+                    <div class="flex flex-col items-center"><span class="text-xs uppercase tracking-widest text-gray-500 mb-1">Academics</span> <strong class="text-apple-dark-surface" id="sum-gpa"></strong></div>
+                    <div class="flex flex-col items-center"><span class="text-xs uppercase tracking-widest text-gray-500 mb-1">Target Major</span> <strong class="text-apple-dark-surface" id="sum-major"></strong></div>
+                </div>
+            </div>
+
+            <!-- Major Recommendation Section -->
+            <div class="mb-24">
+                <h3 class="sf-display-section text-center mb-10">AI Recommended Major</h3>
+                <div class="apple-card max-w-4xl mx-auto">
+                    <h4 class="sf-display-card text-apple-blue mb-4 text-center" id="rec-major-title">전공 이름</h4>
+                    <p class="sf-text-body text-gray-600 leading-relaxed text-center max-w-2xl mx-auto" id="rec-major-desc">전공 설명</p>
+                </div>
+            </div>
+
+            <h3 class="sf-display-section text-center mb-4">Recommended Universities</h3>
+            <p id="region-note" class="sf-text-caption text-gray-500 text-center mb-12 hidden"></p>
+
+            <!-- Universities Grid -->
+            <div id="university-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24 mt-8">
+                <!-- University Cards Injected Here -->
+            </div>
+
+            <!-- Banner for Chongro Board -->
+            <a href="https://www.coei.com/uhak-info/rc/au" target="_blank" class="info-banner p-10 mb-24 group transition-transform duration-300 hover:scale-[1.01]">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="text-center md:text-left">
+                        <p class="sf-text-caption text-[#2997ff] font-semibold uppercase tracking-wider mb-2">Resource Center</p>
+                        <h4 class="sf-display-card text-white mb-2">종로유학원 호주 대학진학 정보 게시판</h4>
+                        <p class="sf-text-body text-gray-400">간호 GE·석사 과정 비교, 검정고시 명문대 진학, 장학금·비자 최신 소식을 확인하세요.</p>
+                    </div>
+                    <div>
+                        <span class="apple-btn-primary bg-white text-[#1d1d1f] hover:bg-gray-200">
+                            바로가기 <i class="fa-solid fa-arrow-right text-xs ml-2"></i>
+                        </span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Next Steps & Info -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
+                <!-- Next Steps Card -->
+                <div class="apple-card-flat">
+                    <h4 class="sf-display-card-bold mb-6 border-b border-gray-200 pb-4">Next Steps</h4>
+                    <ul class="sf-text-body space-y-4 text-gray-600" id="next-steps-list">
+                        <!-- Injected via JS (학부/석사별 상이) -->
+                    </ul>
+                </div>
+
+                <!-- YouTube Video Card -->
+                <div class="apple-card-flat flex flex-col bg-[#272729] text-white">
+                    <h4 class="sf-display-card-bold mb-6 border-b border-gray-600 pb-4">Featured Video</h4>
+                    <a id="yt-link" href="#" target="_blank" class="block relative rounded-lg overflow-hidden group flex-1 bg-black">
+                        <img id="yt-thumb" src="" alt="YouTube Thumbnail" class="w-full h-full object-cover transition duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-60">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fa-brands fa-youtube text-5xl text-white opacity-90 shadow-sm drop-shadow-lg"></i>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 pt-12">
+                            <span id="yt-title" class="text-white sf-text-caption font-semibold block line-clamp-2">비디오 제목</span>
+                            <span class="text-gray-400 text-xs mt-1 block">유학채널 | 종로유학원</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action Footer -->
+        <div class="mt-20 text-center border-t border-gray-200 pt-16">
+            <h2 class="sf-display-section mb-8">전문가와 함께 현실로 만드십시오.</h2>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://www.coei.com/info/consult/reserve.php" target="_blank" class="apple-btn-primary">
+                    1:1 방문 상담 예약
+                </a>
+                <a href="tel:1577-5682" class="apple-link-pill light-bg">
+                    전화 문의 (1577-5682) <i class="fa-solid fa-chevron-right text-xs ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // DATA — 학부(schools) / 석사(masterSchools) 프로그램 정보
+        // state: NSW / VIC / QLD / WA / SA / ACT
+        // ============================================================
+        const majorData = {
+            "간호학과 (Nursing)": {
+                desc: "호주 영주권 발급 1위 직업군. 수능 6등급이나 검정고시로도 디플로마를 통해 명문대 진학이 가능하며, 높은 임금과 쾌적한 근무환경을 자랑합니다.",
+                masterDesc: "비전공 학사 소지자도 2년 GE(Graduate Entry) 과정으로 간호사 면허(RN) 취득이 가능합니다. 졸업 후 취업과 영주권 신청까지 이어지는 가장 확실한 커리어 전환 경로입니다.",
+                schools: [
+                    { name: "Griffith University", state: "QLD", degree: "Bachelor of Nursing (간호학 학사)", rank: "호주 내 최상위권", req: "수능 317점 또는 디플로마", ielts: "7.0", tuition: "AUD $41,000", url: "https://www.griffith.edu.au/study/nursing" },
+                    { name: "UTS", state: "NSW", degree: "Bachelor of Nursing (간호학 학사)", rank: "호주 간호학 1위 수준", req: "수능 300점 또는 디플로마", ielts: "7.0", tuition: "AUD $48,500", url: "https://www.uts.edu.au/study/health/nursing" },
+                    { name: "QUT", state: "QLD", degree: "Bachelor of Nursing (간호학 학사)", rank: "퀸즐랜드 최대 규모", req: "수능 9등급 이내", ielts: "7.0", tuition: "AUD $42,500", url: "https://www.qut.edu.au/study/nursing" }
+                ],
+                masterSchools: [
+                    { name: "University of Sydney", state: "NSW", degree: "Master of Nursing / Graduate Entry (간호학 석사)", rank: "QS 간호학 세계 최상위권", req: "학사 학위 (비전공 지원 가능)", ielts: "7.0", tuition: "AUD $57,000", url: "https://www.sydney.edu.au/courses/courses/pc/master-of-nursing.html" },
+                    { name: "Monash University", state: "VIC", degree: "Master of Nursing Practice (간호실무 석사)", rank: "Go8 명문 · 멜버른", req: "학사 학위 + 선수과목", ielts: "7.0", tuition: "AUD $52,000", url: "https://www.monash.edu/medicine/nursing" },
+                    { name: "QUT", state: "QLD", degree: "Master of Nursing - Graduate Entry (간호학 석사)", rank: "퀸즐랜드 간호 명문", req: "학사 학위 (비전공 지원 가능)", ielts: "7.0", tuition: "AUD $44,000", url: "https://www.qut.edu.au/study/nursing" }
+                ],
+                videoId: "Ibm0rNLaOxg",
+                videoTitle: "🇦🇺 호주 유학 준비, 늦기 전에 확인해야 할 입학 조건"
+            },
+            "약학/약대 (Pharmacy)": {
+                desc: "호주 약대 졸업 후 한국 약사 면허로 전환이 가능합니다. 수능 3~4등급으로 세계적인 명문대에 입학하여 높은 연봉을 기대할 수 있습니다.",
+                masterDesc: "화학·생물 등 관련 학사 이수자는 2년 Master of Pharmacy 과정으로 약사 등록 자격을 취득할 수 있습니다. 학부보다 짧은 기간에 전문직 면허에 도달하는 경로입니다.",
+                schools: [
+                    { name: "University of Sydney", state: "NSW", degree: "Bachelor of Pharmacy (Honours) / Master of Pharmacy (약학 학·석사 통합)", rank: "QS 세계 20위권", req: "수능 346점 이상", ielts: "6.5", tuition: "AUD $60,500", url: "https://www.sydney.edu.au/medicine-health/schools/sydney-pharmacy-school.html" },
+                    { name: "Monash University", state: "VIC", degree: "Bachelor of Pharmacy (Honours) / Master of Pharmacy (약학 학·석사 통합)", rank: "QS 세계 2위 (약학)", req: "수능 350점 이상 (선수과목 必)", ielts: "6.5", tuition: "AUD $56,700", url: "https://www.monash.edu/pharm" },
+                    { name: "Griffith University", state: "QLD", degree: "Bachelor of Pharmacy (Honours) (약학 우수학사)", rank: "QS 151-200위", req: "수능 331점 (교차지원 가능)", ielts: "7.0", tuition: "AUD $42,600", url: "https://www.griffith.edu.au/study/pharmacy" }
+                ],
+                masterSchools: [
+                    { name: "University of Sydney", state: "NSW", degree: "Master of Pharmacy (약학 석사 2년)", rank: "QS 세계 20위권", req: "관련 학사 (화학·생물 이수)", ielts: "7.0", tuition: "AUD $62,000", url: "https://www.sydney.edu.au/medicine-health/schools/sydney-pharmacy-school.html" },
+                    { name: "Monash University", state: "VIC", degree: "Master of Pharmaceutical Science (제약과학 석사)", rank: "QS 세계 2위 (약학)", req: "이공계 학사", ielts: "6.5", tuition: "AUD $53,000", url: "https://www.monash.edu/pharm" },
+                    { name: "Griffith University", state: "QLD", degree: "Master of Pharmacy (약학 석사)", rank: "QS 151-200위", req: "관련 학사 + GPA 요건", ielts: "6.5", tuition: "AUD $46,000", url: "https://www.griffith.edu.au/study/pharmacy" }
+                ],
+                videoId: "Ibm0rNLaOxg",
+                videoTitle: "🇦🇺 호주 유학 준비, 늦기 전에 확인해야 할 입학 조건"
+            },
+            "IT 및 사이버보안 (IT/Cyber Security)": {
+                desc: "3년 만에 IT 학사 학위 취득이 가능합니다. 실무 중심 교육과 인턴십을 통해 글로벌 IT 기업 취업 및 호주 기술이민에 유리합니다.",
+                masterDesc: "비전공자도 지원 가능한 2년 Master of IT 과정이 다수 개설되어 있습니다. 문과 출신 직장인의 커리어 전환과 기술이민(ICT 직군)에 가장 인기 있는 경로입니다.",
+                schools: [
+                    { name: "UTS", state: "NSW", degree: "Bachelor of Science in Information Technology (정보기술학 학사)", rank: "세계 88위 / 성장률 1위", req: "수능점수 또는 디플로마", ielts: "6.5", tuition: "AUD $52,000", url: "https://www.uts.edu.au/study/information-technology" },
+                    { name: "Monash University", state: "VIC", degree: "Bachelor of Information Technology (정보기술학 학사)", rank: "Go8 명문대", req: "수능 또는 디플로마", ielts: "6.5", tuition: "AUD $51,800", url: "https://www.monash.edu/it" },
+                    { name: "Griffith University", state: "QLD", degree: "Bachelor of Information Technology (정보기술학 학사)", rank: "상위 2% 명문", req: "수능 또는 디플로마", ielts: "6.5", tuition: "AUD $38,500", url: "https://www.griffith.edu.au/study/information-technology" }
+                ],
+                masterSchools: [
+                    { name: "UNSW", state: "NSW", degree: "Master of Information Technology (정보기술 석사)", rank: "Go8 · 호주 공학/IT 명문", req: "학사 학위 (비전공 트랙 有)", ielts: "6.5", tuition: "AUD $54,000", url: "https://www.unsw.edu.au/study/postgraduate/master-of-information-technology" },
+                    { name: "Monash University", state: "VIC", degree: "Master of Information Technology (정보기술 석사)", rank: "Go8 명문대", req: "학사 학위 (전공 무관)", ielts: "6.5", tuition: "AUD $53,000", url: "https://www.monash.edu/it" },
+                    { name: "QUT", state: "QLD", degree: "Master of Information Technology (정보기술 석사)", rank: "실무 중심 · 브리즈번", req: "학사 학위 (전공 무관)", ielts: "6.5", tuition: "AUD $42,000", url: "https://www.qut.edu.au/study/information-technology" }
+                ],
+                videoId: "3zjufz-HyfY",
+                videoTitle: "🇦🇺호주 가기 일주일 전… 오리엔테이션에서 뭘 할까?"
+            },
+            "공학/엔지니어링 (Engineering)": {
+                desc: "토목, 기계, 전기 등 기술 직군으로 졸업 후 졸업생 비자(2년)를 통해 경력을 쌓고 기술이민을 신청하기 매우 좋은 분야입니다.",
+                masterDesc: "공학 학사 이수자는 2년 Master of Engineering(EA 인증) 과정으로 전문 엔지니어 자격을 강화할 수 있습니다. 졸업생 비자 및 기술이민 점수에서 가장 유리한 분야 중 하나입니다.",
+                schools: [
+                    { name: "UNSW", state: "NSW", degree: "Bachelor of Engineering (Honours) (공학 우수학사)", rank: "호주 공대 1위 수준", req: "수능 우수 또는 파운데이션", ielts: "6.5", tuition: "AUD $55,000", url: "https://www.unsw.edu.au/engineering" },
+                    { name: "QUT", state: "QLD", degree: "Bachelor of Engineering (Honours) (공학 우수학사)", rank: "실무/취업 우수", req: "수능 또는 디플로마", ielts: "6.5", tuition: "AUD $44,000", url: "https://www.qut.edu.au/study/engineering" },
+                    { name: "University of Sydney", state: "NSW", degree: "Bachelor of Engineering Honours (공학 우수학사)", rank: "Go8 최상위 명문", req: "수능 우수 또는 파운데이션", ielts: "6.5", tuition: "AUD $58,000", url: "https://www.sydney.edu.au/engineering/" }
+                ],
+                masterSchools: [
+                    { name: "UNSW", state: "NSW", degree: "Master of Engineering (공학 석사, EA 인증)", rank: "호주 공대 1위 수준", req: "공학 계열 학사", ielts: "6.5", tuition: "AUD $56,000", url: "https://www.unsw.edu.au/engineering" },
+                    { name: "University of Melbourne", state: "VIC", degree: "Master of Engineering (공학 석사)", rank: "QS 세계 10위권", req: "이공계 학사 (비전공 트랙 有)", ielts: "6.5", tuition: "AUD $58,000", url: "https://study.unimelb.edu.au/find/courses/graduate/master-of-engineering/" },
+                    { name: "University of Queensland", state: "QLD", degree: "Master of Engineering (공학 석사)", rank: "Go8 · 브리즈번", req: "공학 계열 학사 + GPA", ielts: "6.5", tuition: "AUD $52,000", url: "https://study.uq.edu.au/study-options/programs/master-engineering-5619" }
+                ],
+                videoId: "3zjufz-HyfY",
+                videoTitle: "🇦🇺호주 가기 일주일 전… 오리엔테이션에서 뭘 할까?"
+            },
+            "의대/의전원 (Medicine)": {
+                desc: "한국 수능 점수로 지원이 가능합니다. ISAT/UCAT 등 적성검사와 인터뷰가 요구되며 철저한 사전 준비가 필수적입니다.",
+                masterDesc: "학사 학위 소지자는 GAMSAT/MCAT 응시 후 4년 의학전문(MD) 과정에 지원할 수 있습니다. 학부 성적(GPA)과 적성시험, 인터뷰를 종합 평가하므로 전략적 준비가 필수입니다.",
+                schools: [
+                    { name: "University of Sydney", state: "NSW", degree: "Bachelor of Science and Doctor of Medicine (의학 통합 학·석사 7년)", rank: "의대 7년 과정", req: "CSAT 393, 인터뷰", ielts: "7.0", tuition: "AUD $95,000", url: "https://www.sydney.edu.au/medicine-health/" },
+                    { name: "WSU", state: "NSW", degree: "Doctor of Medicine (의학 박사 5년)", rank: "의대 5년 과정", req: "CSAT 370, ISAT 요구", ielts: "7.0", tuition: "AUD $82,000", url: "https://www.westernsydney.edu.au/schools/som" },
+                    { name: "Monash University", state: "VIC", degree: "Bachelor of Medical Science and Doctor of Medicine (의학 통합 학·석사 5년)", rank: "의대 5년 과정", req: "CSAT 380, ISAT, 인터뷰", ielts: "7.0", tuition: "AUD $92,000", url: "https://www.monash.edu/medicine" }
+                ],
+                masterSchools: [
+                    { name: "University of Melbourne", state: "VIC", degree: "Doctor of Medicine (MD, 의학전문 4년)", rank: "QS 의학 세계 10위권", req: "학사 + GAMSAT/MCAT + 인터뷰", ielts: "7.0", tuition: "AUD $100,000", url: "https://study.unimelb.edu.au/find/courses/graduate/doctor-of-medicine/" },
+                    { name: "University of Queensland", state: "QLD", degree: "Doctor of Medicine (MD, 4년)", rank: "Go8 의학 명문", req: "학사 + GAMSAT/MCAT", ielts: "7.0", tuition: "AUD $94,000", url: "https://medicine-program.uq.edu.au/" },
+                    { name: "University of Sydney", state: "NSW", degree: "Doctor of Medicine (MD, 4년)", rank: "QS 세계 20위권", req: "학사 + GAMSAT + 인터뷰", ielts: "7.0", tuition: "AUD $98,000", url: "https://www.sydney.edu.au/medicine-health/" }
+                ],
+                videoId: "Ibm0rNLaOxg",
+                videoTitle: "🇦🇺 호주 유학 준비, 늦기 전에 확인해야 할 입학 조건"
+            },
+            "호텔경영학 (Hospitality)": {
+                desc: "세계적인 관광 대국 호주. 학위 과정 중 포함된 유급 인턴십을 통해 글로벌 경력과 높은 연봉을 기대할 수 있습니다.",
+                masterDesc: "전공 무관 학사 소지자가 지원 가능한 관광·호텔경영 석사 과정입니다. 유급 인턴십과 글로벌 호텔 체인 네트워크로 실무 경력을 쌓아 관리자(Manager) 커리어로 직행합니다.",
+                schools: [
+                    { name: "Griffith University", state: "QLD", degree: "Bachelor of International Tourism and Hotel Management (국제관광호텔경영학 학사)", rank: "호주 호텔경영 1위", req: "수능 317점 또는 디플로마", ielts: "6.5", tuition: "AUD $37,000", url: "https://www.griffith.edu.au/study/tourism-hospitality" },
+                    { name: "The Hotel School", state: "NSW", degree: "Bachelor of Business in Hotel Management (호텔경영 상학학사)", rank: "유급 인턴십 최강", req: "고교 졸업 이상 (내신 무관)", ielts: "6.0", tuition: "AUD $34,500", url: "https://hotelschool.scu.edu.au/" }
+                ],
+                masterSchools: [
+                    { name: "Griffith University", state: "QLD", degree: "Master of International Tourism and Hospitality Management (국제관광호스피탈리티 석사)", rank: "호주 호텔경영 1위", req: "학사 학위 (전공 무관)", ielts: "6.5", tuition: "AUD $41,000", url: "https://www.griffith.edu.au/study/tourism-hospitality" },
+                    { name: "Blue Mountains (BMIHMS)", state: "NSW", degree: "Master of International Hotel Leadership (국제호텔리더십 석사)", rank: "호주 호텔스쿨 명성 1위", req: "학사 또는 관련 경력", ielts: "6.5", tuition: "AUD $39,000", url: "https://www.bluemountains.edu.au/" },
+                    { name: "The Hotel School", state: "NSW", degree: "Master of Business in Global Hotel Leadership (글로벌호텔리더십 석사)", rank: "유급 인턴십 최강", req: "학사 학위 (전공 무관)", ielts: "6.5", tuition: "AUD $37,000", url: "https://hotelschool.scu.edu.au/" }
+                ],
+                videoId: "v1kETCCZFtE",
+                videoTitle: "영어도 배우고, 알바까지 호주로 어학연수 고고!!"
+            }
+        };
+
+        const regionLabels = { "NSW": "뉴사우스웨일즈 (시드니)", "VIC": "빅토리아 (멜버른)", "QLD": "퀸즐랜드 (브리즈번·골드코스트)", "OTHER": "기타 지역 (퍼스·애들레이드·캔버라)", "ANY": "상관없음" };
+
+        let userProfile = { degree: "", region: "", regionCode: "ANY", english: "", grades: "", major: "", target: "" };
+        let currentStepId = "region";
+        let stepCount = 1;
+        const totalEstimatedSteps = 5; // 지역 → 영어 → 성적 → 전공 → 목표
+
+        const questionFlow = {
+            "region": {
+                question: "선호하는 호주 지역을 선택해 주세요.",
+                options: [
+                    { label: "뉴사우스웨일즈 — 시드니", next: "eng_type", val: "NSW" },
+                    { label: "빅토리아 — 멜버른", next: "eng_type", val: "VIC" },
+                    { label: "퀸즐랜드 — 브리즈번 · 골드코스트", next: "eng_type", val: "QLD" },
+                    { label: "기타 지역 — 퍼스 · 애들레이드 · 캔버라", next: "eng_type", val: "OTHER" },
+                    { label: "상관없음 — 최적의 학교 위주로 추천", next: "eng_type", val: "ANY" }
+                ],
+                key: "region"
+            },
+            "eng_type": {
+                question: "현재 보유하고 계신 공인 영어 시험 종류를 선택해 주세요.",
+                options: [
+                    { label: "IELTS (아이엘츠)", next: "eng_score_ielts" },
+                    { label: "PTE (피티이)", next: "eng_score_pte" },
+                    { label: "TOEFL iBT (토플)", next: "eng_score_toefl" },
+                    { label: "아직 준비 전입니다", next: "grades", saveVal: "준비 전 (성적 없음)" }
+                ],
+                key: null // handled manually
+            },
+            "eng_score_ielts": {
+                question: "IELTS(Academic) 점수대를 선택해 주세요.",
+                options: [
+                    { label: "IELTS 7.0 이상", next: "grades" },
+                    { label: "IELTS 6.5", next: "grades" },
+                    { label: "IELTS 6.0", next: "grades" },
+                    { label: "IELTS 5.5 이하", next: "grades" }
+                ],
+                key: "english"
+            },
+            "eng_score_pte": {
+                question: "PTE(Academic) 점수대를 선택해 주세요.",
+                options: [
+                    { label: "PTE 65점 이상", next: "grades" },
+                    { label: "PTE 58~64점", next: "grades" },
+                    { label: "PTE 50~57점", next: "grades" },
+                    { label: "PTE 49점 이하", next: "grades" }
+                ],
+                key: "english"
+            },
+            "eng_score_toefl": {
+                question: "TOEFL iBT 점수대를 선택해 주세요.",
+                options: [
+                    { label: "TOEFL 94점 이상", next: "grades" },
+                    { label: "TOEFL 79~93점", next: "grades" },
+                    { label: "TOEFL 60~78점", next: "grades" },
+                    { label: "TOEFL 59점 이하", next: "grades" }
+                ],
+                key: "english"
+            },
+            "grades": {
+                question: "최종 학력 및 성적(고교 내신 또는 수능)은 어느 정도이신가요?",
+                options: [
+                    { label: "고교 1~3등급 / 수능 330점 이상", next: "major" },
+                    { label: "고교 4~5등급 / 수능 보통 수준", next: "major" },
+                    { label: "고교 6등급 이하 / 검정고시 졸업", next: "major" },
+                    { label: "대학교 재학/휴학/졸업자", next: "major" }
+                ],
+                key: "grades"
+            },
+            "grades_master": {
+                question: "학부(학사) 성적은 어느 정도이신가요?",
+                options: [
+                    { label: "학점 3.5 / 4.5 이상 (상위권)", next: "major" },
+                    { label: "학점 3.0 ~ 3.5", next: "major" },
+                    { label: "학점 3.0 미만", next: "major" },
+                    { label: "졸업예정자 / 전공 변경 희망", next: "major" }
+                ],
+                key: "grades"
+            },
+            "major": {
+                question: "호주 유학 시 가장 희망하는 전공 분야를 선택해 주십시오.",
+                options: Object.keys(majorData).map(m => ({ label: m, next: "target" })),
+                key: "major"
+            },
+            "target": {
+                question: "호주 유학의 가장 핵심적인 목표는 무엇입니까?",
+                options: [
+                    { label: "Go8(호주 명문대) 위주 진학", next: "END" },
+                    { label: "현지 취업 및 영주권 취득", next: "END" },
+                    { label: "가성비 및 실무 중심 학위", next: "END" },
+                    { label: "귀국 후 전문직 면허 취득", next: "END" }
+                ],
+                key: "target"
+            }
+        };
+
+        // ============================================================
+        // Hero: rotating hook lines
+        // ============================================================
+        const hookLines = [
+            "성적이 좋아야 명문대에 간다? 호주는 패스웨이가 성적을 이깁니다.",
+            "6등급에서 세계 상위 2% 대학으로 — 1년 디플로마가 만든 역전.",
+            "QS 세계 20위권 시드니대, 수능 점수로 지원하는 방법이 있습니다.",
+            "석사 유학, 늦었다고 생각할 때가 적기입니다. 비전공자도 GE 과정으로.",
+            "호주 영주권의 문 — 간호·IT 전공자가 먼저 통과합니다."
+        ];
+        let hookIdx = 0;
+        setInterval(() => {
+            const el = document.getElementById('hook-rotator');
+            if (!el || el.offsetParent === null) return; // hero hidden
+            el.classList.add('fading');
+            setTimeout(() => {
+                hookIdx = (hookIdx + 1) % hookLines.length;
+                el.innerText = hookLines[hookIdx];
+                el.classList.remove('fading');
+            }, 500);
+        }, 4200);
+
+        // ============================================================
+        // Flow control
+        // ============================================================
+        function startConsulting(degreeLabel) {
+            userProfile.degree = degreeLabel;
+            const isMaster = degreeLabel.includes('석사');
+            const chip = document.getElementById('track-chip');
+            chip.innerHTML = isMaster
+                ? '<i class="fa-solid fa-user-tie"></i> 석사 (Master) 트랙'
+                : '<i class="fa-solid fa-graduation-cap"></i> 학부 (Bachelor) 트랙';
+
+            document.getElementById('hero-section').classList.add('hidden');
+            document.getElementById('consulting-section').classList.remove('hidden');
+            document.getElementById('consulting-section').classList.add('fade-in-up');
+            window.scrollTo(0, 0);
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = questionFlow[currentStepId];
+            document.getElementById('step-indicator').innerText = `Step ${stepCount}`;
+            document.getElementById('question-text').innerText = q.question;
+
+            const progress = (stepCount / totalEstimatedSteps) * 100;
+            document.getElementById('progress-bar').style.width = `${progress > 100 ? 100 : progress}%`;
+
+            const grid = document.getElementById('options-grid');
+            grid.innerHTML = '';
+
+            q.options.forEach((opt, index) => {
+                const delay = index * 100;
+                const div = document.createElement('div');
+                div.className = `option-card fade-in-up`;
+                div.style.animationDelay = `${delay}ms`;
+                div.innerText = opt.label;
+                div.onclick = () => handleAnswer(opt, q.key);
+                grid.appendChild(div);
+            });
+        }
+
+        function handleAnswer(selectedOption, stateKey) {
+            // Save data
+            if (stateKey) {
+                userProfile[stateKey] = selectedOption.label;
+                if (stateKey === "region" && selectedOption.val) {
+                    userProfile.regionCode = selectedOption.val;
+                }
+            } else if (currentStepId === "eng_type" && selectedOption.saveVal) {
+                userProfile.english = selectedOption.saveVal;
+            }
+
+            if (selectedOption.next === "END") {
+                document.getElementById('progress-bar').style.width = `100%`;
+                setTimeout(generateReport, 300);
+            } else {
+                let next = selectedOption.next;
+                // 석사 트랙은 학부 성적 대신 학사 학점을 묻는다
+                if (next === "grades" && userProfile.degree.includes("석사")) {
+                    next = "grades_master";
+                }
+                currentStepId = next;
+                if (currentStepId !== "eng_score_ielts" && currentStepId !== "eng_score_pte" && currentStepId !== "eng_score_toefl") {
+                    stepCount++; // Only increment step for main logical advances
+                }
+                renderQuestion();
+            }
+        }
+
+        // ============================================================
+        // Pathway logic (학부 / 석사 분기)
+        // ============================================================
+        function getPathwayLogic() {
+            let pathwayName = "";
+            let reason = "";
+            const grades = userProfile.grades || "";
+            const major = userProfile.major || "";
+            const isMaster = userProfile.degree.includes("석사");
+
+            if (isMaster) {
+                if (major === "의대/의전원 (Medicine)") {
+                    pathwayName = "Graduate Entry MD Pathway";
+                    reason = "학사 학위를 기반으로 GAMSAT/MCAT 응시 후 4년 의학전문(MD) 과정에 지원하는 경로입니다. GPA·적성시험·인터뷰를 종합 평가하므로 1년 이상의 전략적 준비를 권장합니다.";
+                } else if (grades.includes("전공 변경") || major.includes("간호")) {
+                    pathwayName = "Graduate Entry (GE) 커리어 전환";
+                    reason = "비전공 학사 소지자도 지원 가능한 GE/전환형 석사 과정입니다. 2년 만에 새로운 전문 분야의 학위와 자격을 취득하여 호주 현지 취업 및 영주권 신청으로 연결할 수 있습니다.";
+                } else if (grades.includes("3.0 미만")) {
+                    pathwayName = "Graduate Certificate → Master 패스웨이";
+                    reason = "학부 성적이 석사 직행 요건에 다소 부족한 경우, Graduate Certificate(6개월) 과정을 우수하게 이수한 뒤 석사 본과정으로 진입하는 안전한 우회 경로를 권장합니다.";
+                } else {
+                    pathwayName = "Master Direct Entry (석사 직행)";
+                    reason = "보유하신 학사 학위와 성적으로 호주 명문대 석사 과정에 직접 지원할 수 있습니다. 영어 성적 확보 시 바로 지원 가능하며, 조건부 입학(Conditional Offer)도 활용할 수 있습니다.";
+                }
+                return { name: pathwayName, reason: reason };
+            }
+
+            // ---------- 학부 트랙 ----------
+            if (major === "의대/의전원 (Medicine)") {
+                if (grades.includes("1~3등급")) {
+                    pathwayName = "Direct Entry (의대 직행)";
+                    reason = "최상위권 성적으로 호주 의대 1학년 직행이 가능합니다. ISAT/UCAT 및 인터뷰를 철저히 대비하십시오.";
+                } else {
+                    pathwayName = "Biomedical Science Pathway";
+                    reason = "의대 다이렉트 입학 요건이 부족할 경우, Biomedical(의생명과학) 학사 이수 후 의전원(Doctor of Medicine)으로 진학하는 우회 경로가 가장 안전합니다.";
+                }
+            } else if (grades.includes("6등급") || grades.includes("4~5등급")) {
+                if (major.includes("간호") || major.includes("IT") || major.includes("호텔") || major.includes("공학")) {
+                    pathwayName = "Diploma Transfer (디플로마 편입)";
+                    reason = "고교 성적이 부족해도 호주 명문대 산하 디플로마(1년) 과정을 이수하면 본교 2학년으로 편입이 보장됩니다. 시간과 비용을 절약하는 최적의 방법입니다.";
+                } else {
+                    pathwayName = "Foundation Pathway (파운데이션)";
+                    reason = "해당 전공 및 명문대 진학을 위해 학력 조건과 영어 기초를 탄탄히 다지는 파운데이션(대학예비과정) 이수 후 1학년으로 진학하는 경로를 권장합니다.";
+                }
+            } else if (grades.includes("대학교 재학")) {
+                if (major.includes("간호")) {
+                    pathwayName = "Graduate Entry (GE) 과정";
+                    reason = "비전공 학사 소지자도 간호학 학사를 2년 만에 취득할 수 있는 GE 과정을 통해 빠른 면허 취득 및 영주권 신청이 가능합니다.";
+                } else {
+                    pathwayName = "Direct Entry / 학점 인정 편입";
+                    reason = "보유하신 대학 학점을 인정받아 호주 대학교 1학년 입학 또는 편입을 통해 유학 기간을 단축할 수 있습니다.";
+                }
+            } else {
+                pathwayName = "Direct Entry (1학년 직행)";
+                reason = "우수한 성적을 바탕으로 호주 대학교 1학년에 직접 지원할 수 있는 완벽한 조건을 갖추고 있습니다.";
+            }
+            return { name: pathwayName, reason: reason };
+        }
+
+        // ============================================================
+        // Report
+        // ============================================================
+        function generateReport() {
+            document.getElementById('consulting-section').classList.add('hidden');
+            document.getElementById('result-hero').classList.remove('hidden');
+            document.getElementById('result-details').classList.remove('hidden');
+            window.scrollTo(0, 0);
+
+            const isMaster = userProfile.degree.includes("석사");
+            const pathwayData = getPathwayLogic();
+            const majorInfo = majorData[userProfile.major] || majorData["간호학과 (Nursing)"];
+
+            // Populate Hero
+            document.getElementById('result-pathway-title').innerText = pathwayData.name;
+            document.getElementById('result-pathway-desc').innerText = pathwayData.reason;
+
+            // Populate Summary
+            document.getElementById('sum-degree').innerText = isMaster ? "석사 (Master)" : "학부 (Bachelor)";
+            document.getElementById('sum-region').innerText = (userProfile.region || "상관없음").split('—')[0].trim();
+            document.getElementById('sum-eng').innerText = userProfile.english.split(' ')[0] || "준비 중";
+            document.getElementById('sum-gpa').innerText = userProfile.grades.split('/')[0].trim() || "-";
+            document.getElementById('sum-major').innerText = userProfile.major.split('(')[0].trim() || "-";
+
+            // Populate Recommended Major
+            document.getElementById('rec-major-title').innerText = userProfile.major + (isMaster ? " · 석사 과정" : " · 학부 과정");
+            document.getElementById('rec-major-desc').innerText = (isMaster && majorInfo.masterDesc) ? majorInfo.masterDesc : majorInfo.desc;
+
+            // Region-aware university sorting
+            const regionCode = userProfile.regionCode || "ANY";
+            let schools = (isMaster && majorInfo.masterSchools) ? [...majorInfo.masterSchools] : [...majorInfo.schools];
+            let matchedCount = 0;
+            if (regionCode !== "ANY" && regionCode !== "OTHER") {
+                schools.sort((a, b) => (b.state === regionCode) - (a.state === regionCode));
+                matchedCount = schools.filter(s => s.state === regionCode).length;
+            }
+
+            // Region note
+            const noteEl = document.getElementById('region-note');
+            if (regionCode === "OTHER") {
+                noteEl.innerText = "※ 퍼스·애들레이드·캔버라 지역의 " + userProfile.major.split('(')[0].trim() + " 프로그램은 전문가 상담 시 맞춤 안내해 드립니다. 아래는 대표 추천 프로그램입니다.";
+                noteEl.classList.remove('hidden');
+            } else if (regionCode !== "ANY" && matchedCount === 0) {
+                noteEl.innerText = "※ 선호하신 지역(" + regionLabels[regionCode] + ") 내 프로그램은 상담 시 추가 안내해 드립니다. 아래는 전공 기준 최상위 추천입니다.";
+                noteEl.classList.remove('hidden');
+            } else {
+                noteEl.classList.add('hidden');
+            }
+
+            // Populate Universities
+            const univGrid = document.getElementById('university-grid');
+            let html = '';
+            schools.forEach(school => {
+                const isMatch = regionCode !== "ANY" && school.state === regionCode;
+                html += `
+                    <div class="apple-card flex flex-col justify-between h-full">
+                        <div>
+                            <div class="flex items-start justify-between mb-2 gap-2">
+                                <h4 class="sf-display-card-bold text-[#1d1d1f]">${school.name}</h4>
+                                <span class="text-[11px] font-bold text-gray-400 bg-gray-100 rounded-full px-2.5 py-1 whitespace-nowrap mt-1">${school.state}</span>
+                            </div>
+                            ${isMatch ? '<span class="region-badge mb-3"><i class="fa-solid fa-location-dot"></i> 선호 지역 일치</span>' : ''}
+                            <p class="text-xs text-apple-blue font-semibold mb-4 mt-2 uppercase tracking-wider">${school.degree}</p>
+                            <p class="sf-text-caption text-gray-500 mb-6 font-semibold uppercase tracking-wide">${school.rank}</p>
+
+                            <div class="bg-[#fafafc] rounded-[8px] p-4 mb-8 space-y-3">
+                                <div class="flex justify-between sf-text-caption border-b border-gray-100 pb-2">
+                                    <span class="text-gray-500">입학 요건</span>
+                                    <strong class="text-[#1d1d1f] text-right w-1/2">${school.req}</strong>
+                                </div>
+                                <div class="flex justify-between sf-text-caption border-b border-gray-100 pb-2">
+                                    <span class="text-gray-500">영어 요건</span>
+                                    <strong class="text-[#1d1d1f]">IELTS ${school.ielts}</strong>
+                                </div>
+                                <div class="flex justify-between sf-text-caption pt-1">
+                                    <span class="text-gray-500">예상 학비</span>
+                                    <strong class="text-[#1d1d1f] text-orange-600">${school.tuition}</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="${school.url}" target="_blank" class="apple-link-pill light-bg w-full text-center mt-auto">
+                            공식 홈페이지 방문 <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-2"></i>
+                        </a>
+                    </div>
+                `;
+            });
+            univGrid.innerHTML = html;
+
+            // Next Steps (학부/석사별)
+            const stepsList = document.getElementById('next-steps-list');
+            if (isMaster) {
+                stepsList.innerHTML = `
+                    <li class="flex items-start"><i class="fa-solid fa-check text-apple-blue mt-1 mr-4"></i> <span><strong>서류 준비:</strong> 영문 학사 졸업·성적 증명서, 이력서(CV), 여권 사본을 준비하십시오. 전공에 따라 학업계획서(SOP)가 요구됩니다.</span></li>
+                    <li class="flex items-start"><i class="fa-solid fa-check text-apple-blue mt-1 mr-4"></i> <span><strong>영어 성적:</strong> 조건부 입학(Conditional Offer)을 먼저 받고 영어 성적을 나중에 제출하는 전략도 가능합니다.</span></li>
+                    <li class="flex items-start"><i class="fa-solid fa-check text-apple-blue mt-1 mr-4"></i> <span><strong>비자 및 정착:</strong> 입학허가서(CoE) 수령 후 학생 비자(Subclass 500)를 신청하고, 졸업 후 졸업생 비자(485) 플랜까지 설계합니다.</span></li>
+                `;
+            } else {
+                stepsList.innerHTML = `
+                    <li class="flex items-start"><i class="fa-solid fa-check text-apple-blue mt-1 mr-4"></i> <span><strong>어학 준비:</strong> 지원 전, 또는 조건부 입학(Conditional Offer) 수령 후 필요한 영어 성적을 확보하십시오.</span></li>
+                    <li class="flex items-start"><i class="fa-solid fa-check text-apple-blue mt-1 mr-4"></i> <span><strong>서류 준비:</strong> 영문 고등학교/대학교 졸업 및 성적 증명서, 여권 사본을 준비하십시오.</span></li>
+                    <li class="flex items-start"><i class="fa-solid fa-check text-apple-blue mt-1 mr-4"></i> <span><strong>비자 및 숙소:</strong> 입학허가서(CoE) 수령 후 학생 비자(Subclass 500) 및 숙소를 배정합니다.</span></li>
+                `;
+            }
+
+            // Populate YouTube
+            document.getElementById('yt-title').innerText = majorInfo.videoTitle;
+            document.getElementById('yt-thumb').src = `https://img.youtube.com/vi/${majorInfo.videoId}/maxresdefault.jpg`;
+            document.getElementById('yt-link').href = `https://www.youtube.com/watch?v=${majorInfo.videoId}`;
+        }
+
+        function downloadPDF() {
+            const element = document.getElementById('pdf-content');
+            const opt = {
+                margin:       [10, 10, 10, 10],
+                filename:     '종로유학원_호주유학_AI리포트.pdf',
+                image:        { type: 'jpeg', quality: 1.0 },
+                html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#f5f5f7' },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            const btn = event.currentTarget;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '저장 중...';
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                btn.innerHTML = originalText;
+            });
+        }
+    </script>
+</body>
+</html>
