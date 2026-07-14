@@ -17,7 +17,7 @@
             theme: {
                 extend: {
                     colors: {
-                        'apple-black': '#000000',
+                        'apple-black': '#0b0b0f',
                         'apple-dark-surface': '#1d1d1f',
                         'apple-light': '#f5f5f7',
                         'apple-white': '#ffffff',
@@ -38,7 +38,7 @@
     <style>
         body {
             font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
-            background-color: #000000;
+            background-color: #0b0b0f;
             color: #f5f5f7;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -68,28 +68,15 @@
             -webkit-backdrop-filter: saturate(180%) blur(20px);
         }
 
-        /* Hero ambient glow */
+        /* Hero ambient light: single, restrained */
         .hero-glow {
             position: absolute;
             border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.35;
+            filter: blur(140px);
+            opacity: 0.18;
             pointer-events: none;
         }
-        .hero-glow.blue { width: 560px; height: 560px; background: #0a4a8f; top: -140px; left: 50%; transform: translateX(-70%); animation: drift 14s ease-in-out infinite alternate; }
-        .hero-glow.violet { width: 420px; height: 420px; background: #3d2b7a; bottom: -80px; right: -60px; animation: drift 18s ease-in-out infinite alternate-reverse; }
-        @keyframes drift { from { transform: translate(0, 0); } to { transform: translate(60px, 40px); } }
-
-        .hero-gradient-text {
-            background: linear-gradient(100deg, #2997ff 0%, #7dc3ff 45%, #b18cff 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        /* Rotating hook line */
-        .hook-rotator { min-height: 26px; transition: opacity 0.5s ease; }
-        .hook-rotator.fading { opacity: 0; }
+        .hero-glow.blue { width: 640px; height: 480px; background: #0f4c8c; top: -160px; left: 50%; transform: translateX(-50%); }
 
         /* Degree selection cards */
         .degree-card {
@@ -274,24 +261,14 @@
     <!-- ===================== HERO ===================== -->
     <div id="hero-section" class="min-h-screen bg-apple-black flex flex-col justify-center items-center text-center px-4 pt-24 pb-16 relative z-10 transition-opacity duration-500 overflow-hidden">
         <div class="hero-glow blue"></div>
-        <div class="hero-glow violet"></div>
 
         <p class="sf-text-body text-gray-400 mb-5 fade-in-up tracking-widest uppercase text-xs relative">Chongro Overseas Educational Institute</p>
 
-        <h1 class="sf-display-hero text-apple-white mb-4 fade-in-up delay-100 max-w-4xl relative">
-            수능 6등급,<br><span class="hero-gradient-text">호주 명문대 합격.</span>
+        <h1 class="sf-display-hero text-apple-white mb-5 fade-in-up delay-100 max-w-4xl relative">
+            수능 6등급,<br><span class="text-[#4da3ff]">호주 명문대 합격.</span>
         </h1>
-        <p class="sf-display-card text-gray-200 mb-6 fade-in-up delay-200 relative" style="font-weight: 500;">
-            내신은 숫자일 뿐, 경로가 전부다.
-        </p>
-
-        <p id="hook-rotator" class="hook-rotator sf-text-body text-[#2997ff] mb-8 fade-in-up delay-200 relative max-w-2xl">
-            성적이 좋아야 명문대에 간다? 호주는 패스웨이가 성적을 이깁니다.
-        </p>
-
-        <p class="sf-text-body text-gray-300 max-w-2xl mx-auto mb-10 fade-in-up delay-300 relative">
-            학점, 영어 성적, 희망 전공과 지역 데이터를 분석하여 글로벌 커리어와 영주권 취득을 위한
-            <strong class="text-white">최적의 호주 학부·석사 진학 경로</strong>를 제시합니다.
+        <p class="sf-text-body text-gray-300 max-w-xl mx-auto mb-10 fade-in-up delay-200 relative">
+            내신은 숫자일 뿐, 경로가 전부다.<br>성적과 목표를 분석해 학부·석사 두 트랙의 진학 경로를 설계합니다.
         </p>
 
         <!-- 학부 / 석사 선택 -->
@@ -314,12 +291,10 @@
             </button>
         </div>
 
-        <!-- 신뢰 지표 -->
-        <div class="flex flex-wrap justify-center gap-3 fade-in-up delay-400 relative mb-10">
-            <span class="stat-chip"><i class="fa-solid fa-ranking-star"></i> QS 세계 20위권 파트너 대학</span>
-            <span class="stat-chip"><i class="fa-solid fa-passport"></i> 영주권 연계 전공 설계</span>
-            <span class="stat-chip"><i class="fa-solid fa-user-check"></i> 1:1 무료 AI 진단</span>
-        </div>
+        <!-- 실제 운영 거점 -->
+        <p class="sf-text-caption text-gray-500 fade-in-up delay-400 relative mb-8">
+            서울 본점과 시드니, 브리즈번, 멜버른 현지 지사가 유학 전 과정을 함께합니다.
+        </p>
 
         <div class="fade-in-up delay-400 relative">
             <a href="https://www.coei.com/info/consult/reserve.php" target="_blank" class="apple-link-pill">
@@ -419,6 +394,35 @@
                 ※ 표기된 금액은 <strong class="text-gray-500">2026년 국제 학생 홈페이지 기준 학비</strong>(각 대학 공식 사이트 발표 연간 학비)이며, 전공·과목 선택 및 연도별 인상에 따라 달라질 수 있습니다. 정확한 금액은 상담 시 확인해 드립니다.
             </p>
 
+            <!-- 실제 합격 후기 (coei.com 합격후기 게시판 발췌) -->
+            <div class="mb-24">
+                <h3 class="sf-display-section text-center mb-3">먼저 합격한 학생들의 이야기</h3>
+                <p class="sf-text-body text-gray-500 text-center mb-12 max-w-2xl mx-auto">종로유학원과 함께 2026학년도 호주 대학에 합격한 학생들의 실제 후기입니다.</p>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+                    <div class="apple-card-flat md:col-span-3 flex flex-col justify-between border border-gray-200" style="border-radius:12px;">
+                        <p class="sf-text-body text-gray-700 leading-relaxed mb-6">"2019년 검정고시 합격 후 진로를 오래 고민했습니다. 이론 위주보다 환자 중심의 실무 교육이 발달한 호주에서 약학을 배우기로 결정했습니다."</p>
+                        <div>
+                            <p class="sf-text-caption font-bold text-[#1d1d1f]">박*규 <span class="font-normal text-gray-500">| Griffith University 약학 | 26년 2월 학기 (장학생)</span></p>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2 flex flex-col gap-6">
+                        <div class="apple-card-flat flex-1 border border-gray-200" style="border-radius:12px;">
+                            <p class="sf-text-caption text-gray-700 leading-relaxed mb-4">"병원에서 근무하며 약물이 삶을 변화시키는 과정에 매료됐고, 실무 경험을 결합하고자 호주 약대 유학을 결정했습니다."</p>
+                            <p class="sf-text-caption font-bold text-[#1d1d1f]">정*민 <span class="font-normal text-gray-500">| University of Sydney 약학 (장학생)</span></p>
+                        </div>
+                        <div class="apple-card-flat flex-1 border border-gray-200" style="border-radius:12px;">
+                            <p class="sf-text-caption text-gray-700 leading-relaxed mb-4">"동물병원 테크니션으로 일하며 품었던 오랜 꿈을 호주에서 펼칠 수 있게 되어 정말 기쁩니다."</p>
+                            <p class="sf-text-caption font-bold text-[#1d1d1f]">박*미 <span class="font-normal text-gray-500">| Murdoch University 수의학 통합과정</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-8">
+                    <a href="https://www.coei.com/info/customer-reviews/university-cases.php?wh=5" target="_blank" class="apple-link-pill light-bg">
+                        호주 합격 후기 전체 보기 <i class="fa-solid fa-chevron-right text-xs ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
             <!-- Matched Board Articles -->
             <div class="info-banner p-10 mb-24">
                 <div class="text-center md:text-left mb-8">
@@ -463,6 +467,34 @@
             </div>
         </div>
 
+        <!-- 호주 현지 지사 -->
+        <div class="max-w-[980px] mx-auto mt-8">
+            <div class="info-banner p-10">
+                <div class="text-center md:text-left mb-8">
+                    <h4 class="sf-display-card text-white mb-2">호주 현지에서도 이어지는 관리</h4>
+                    <p class="sf-text-body text-gray-400">출국이 끝이 아닙니다. 시드니, 브리즈번, 멜버른 지사에서 입학 후 정착과 학업을 현지에서 지원합니다.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 md:divide-x divide-y md:divide-y-0 divide-[#3a3a3c]">
+                    <div class="py-5 md:py-2 md:px-6 md:first:pl-0">
+                        <p class="sf-text-body font-bold text-white mb-2">시드니 지사</p>
+                        <p class="sf-text-caption text-gray-400 mb-1">Level 2, 383 George St, Sydney NSW 2000</p>
+                        <p class="sf-text-caption text-gray-400">+61 449 092 822 <span class="text-gray-500">| 카카오톡 coei_sy</span></p>
+                    </div>
+                    <div class="py-5 md:py-2 md:px-6">
+                        <p class="sf-text-body font-bold text-white mb-2">브리즈번 지사</p>
+                        <p class="sf-text-caption text-gray-400 mb-1">Level 38, 71 Eagle St, Brisbane QLD 4000</p>
+                        <p class="sf-text-caption text-gray-400">+61 452 485 122 <span class="text-gray-500">| 카카오톡 Skyblueway</span></p>
+                    </div>
+                    <div class="py-5 md:py-2 md:px-6">
+                        <p class="sf-text-body font-bold text-white mb-2">멜버른 지사</p>
+                        <p class="sf-text-caption text-gray-400 mb-1">Suite 804, 343 Little Collins St, Melbourne VIC 3000</p>
+                        <p class="sf-text-caption text-gray-400">+61 3 9670 6692 <span class="text-gray-500">| 카카오톡 tsmel</span></p>
+                    </div>
+                </div>
+                <p class="sf-text-caption text-gray-500 mt-6">※ 방문 시 사전 예약을 부탁드립니다. <a href="https://www.coei.com/info/branches/international.php?BranchNo=54" target="_blank" class="text-[#2997ff] hover:underline">해외 지사 안내 보기</a></p>
+            </div>
+        </div>
+
         <!-- Call to Action Footer -->
         <div class="mt-20 text-center border-t border-gray-200 pt-16">
             <h2 class="sf-display-section mb-8">전문가와 함께 현실로 만드십시오.</h2>
@@ -477,9 +509,42 @@
         </div>
     </div>
 
+    <!-- ===================== SITE FOOTER ===================== -->
+    <footer class="bg-apple-black text-gray-400 py-14 px-4">
+        <div class="max-w-[980px] mx-auto">
+            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-10">
+                <div>
+                    <img src="https://www.coei.com/image/logo.svg" alt="종로유학원" class="h-5 nav-logo mb-4">
+                    <p class="sf-text-caption text-gray-500 mb-1">종로유학원 | Chongro Overseas Educational Institute</p>
+                    <p class="sf-text-caption text-gray-500 mb-1">대표전화 <a href="tel:1577-5682" class="text-gray-300 hover:text-white">1577-5682</a></p>
+                    <p class="sf-text-caption text-gray-500">해외 지사: 시드니, 브리즈번, 멜버른 외</p>
+                </div>
+                <div>
+                    <p class="sf-text-caption font-bold text-gray-300 mb-3 uppercase tracking-wider">Follow</p>
+                    <div class="flex flex-wrap gap-3">
+                        <a href="https://blog.naver.com/chongroblog" target="_blank" rel="noopener" class="stat-chip hover:border-[#2997ff] hover:text-white transition"><i class="fa-solid fa-pen-nib"></i> 네이버 블로그</a>
+                        <a href="https://www.instagram.com/chongro_official" target="_blank" rel="noopener" class="stat-chip hover:border-[#2997ff] hover:text-white transition"><i class="fa-brands fa-instagram"></i> 인스타그램</a>
+                        <a href="https://tv.naver.com/chongro" target="_blank" rel="noopener" class="stat-chip hover:border-[#2997ff] hover:text-white transition"><i class="fa-solid fa-play"></i> 네이버TV</a>
+                        <a href="https://www.youtube.com/user/chongroEdu" target="_blank" rel="noopener" class="stat-chip hover:border-[#2997ff] hover:text-white transition"><i class="fa-brands fa-youtube"></i> 유튜브</a>
+                    </div>
+                </div>
+                <div>
+                    <p class="sf-text-caption font-bold text-gray-300 mb-3 uppercase tracking-wider">바로가기</p>
+                    <ul class="sf-text-caption space-y-2">
+                        <li><a href="https://www.coei.com/uhak-info/rc/au" target="_blank" class="hover:text-white">호주 유학 정보 게시판</a></li>
+                        <li><a href="https://www.coei.com/info/customer-reviews/university-cases.php?wh=5" target="_blank" class="hover:text-white">호주 합격 후기</a></li>
+                        <li><a href="https://www.coei.com/info/consult/reserve.php" target="_blank" class="hover:text-white">상담 예약</a></li>
+                        <li><a href="https://www.coei.com/info/branches/international.php?BranchNo=54" target="_blank" class="hover:text-white">해외 지사 안내</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p class="sf-text-caption text-gray-600 mt-10 pt-6 border-t border-[#26262a]">© Chongro Overseas Educational Institute. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script>
         // ============================================================
-        // DATA — 학부(schools) / 석사(masterSchools) 프로그램 정보
+        // DATA: 학부(schools) / 석사(masterSchools) 프로그램 정보
         // state: NSW / VIC / QLD / WA / SA / ACT
         // ============================================================
         const majorData = {
@@ -651,11 +716,11 @@
             "region": {
                 question: "선호하는 호주 지역을 선택해 주세요.",
                 options: [
-                    { label: "뉴사우스웨일즈 — 시드니", next: "eng_type", val: "NSW" },
-                    { label: "빅토리아 — 멜버른", next: "eng_type", val: "VIC" },
-                    { label: "퀸즐랜드 — 브리즈번 · 골드코스트", next: "eng_type", val: "QLD" },
-                    { label: "기타 지역 — 퍼스 · 애들레이드 · 캔버라", next: "eng_type", val: "OTHER" },
-                    { label: "상관없음 — 최적의 학교 위주로 추천", next: "eng_type", val: "ANY" }
+                    { label: "뉴사우스웨일즈 (시드니)", next: "eng_type", val: "NSW" },
+                    { label: "빅토리아 (멜버른)", next: "eng_type", val: "VIC" },
+                    { label: "퀸즐랜드 (브리즈번, 골드코스트)", next: "eng_type", val: "QLD" },
+                    { label: "기타 지역 (퍼스, 애들레이드, 캔버라)", next: "eng_type", val: "OTHER" },
+                    { label: "상관없음 (최적의 학교 위주로 추천)", next: "eng_type", val: "ANY" }
                 ],
                 key: "region"
             },
@@ -735,28 +800,6 @@
                 key: "target"
             }
         };
-
-        // ============================================================
-        // Hero: rotating hook lines
-        // ============================================================
-        const hookLines = [
-            "성적이 좋아야 명문대에 간다? 호주는 패스웨이가 성적을 이깁니다.",
-            "6등급에서 세계 상위 2% 대학으로 — 1년 디플로마가 만든 역전.",
-            "QS 세계 20위권 시드니대, 수능 점수로 지원하는 방법이 있습니다.",
-            "석사 유학, 늦었다고 생각할 때가 적기입니다. 비전공자도 GE 과정으로.",
-            "호주 영주권의 문 — 간호·IT 전공자가 먼저 통과합니다."
-        ];
-        let hookIdx = 0;
-        setInterval(() => {
-            const el = document.getElementById('hook-rotator');
-            if (!el || el.offsetParent === null) return; // hero hidden
-            el.classList.add('fading');
-            setTimeout(() => {
-                hookIdx = (hookIdx + 1) % hookLines.length;
-                el.innerText = hookLines[hookIdx];
-                el.classList.remove('fading');
-            }, 500);
-        }, 4200);
 
         // ============================================================
         // Flow control
@@ -912,7 +955,7 @@
                         <h4 class="sf-display-card-bold text-[#1d1d1f]">${g.title}</h4>
                     </div>
                     <p class="text-xs text-apple-blue font-semibold uppercase tracking-wider mb-5">${g.en}</p>
-                    <p class="sf-text-caption text-gray-600 mb-5"><strong class="text-[#1d1d1f]">이런 분께 —</strong> ${g.target}</p>
+                    <p class="sf-text-caption text-gray-600 mb-5"><strong class="text-[#1d1d1f]">이런 분께:</strong> ${g.target}</p>
                     <ol class="sf-text-caption text-gray-600 space-y-2 mb-5">
                         ${g.steps.map((s, i) => `<li class="flex items-start"><span class="shrink-0 w-5 h-5 rounded-full bg-[#0071e3] text-white text-[11px] font-bold flex items-center justify-center mr-2 mt-0.5">${i + 1}</span><span>${s}</span></li>`).join('')}
                     </ol>
@@ -1001,7 +1044,7 @@
 
             // Populate Summary
             document.getElementById('sum-degree').innerText = isMaster ? "석사 (Master)" : "학부 (Bachelor)";
-            document.getElementById('sum-region').innerText = (userProfile.region || "상관없음").split('—')[0].trim();
+            document.getElementById('sum-region').innerText = (userProfile.region || "상관없음").split('(')[0].trim();
             document.getElementById('sum-eng').innerText = userProfile.english.split(' ')[0] || "준비 중";
             document.getElementById('sum-gpa').innerText = userProfile.grades.split('/')[0].trim() || "-";
             document.getElementById('sum-major').innerText = userProfile.major.split('(')[0].trim() || "-";
