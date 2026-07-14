@@ -258,48 +258,58 @@
         </div>
     </nav>
 
-    <!-- ===================== HERO ===================== -->
-    <div id="hero-section" class="min-h-screen bg-apple-black flex flex-col justify-center items-center text-center px-4 pt-24 pb-16 relative z-10 transition-opacity duration-500 overflow-hidden">
+    <!-- ===================== HERO (Split) ===================== -->
+    <div id="hero-section" class="min-h-[100dvh] bg-apple-black flex items-center px-4 pt-24 pb-16 relative z-10 transition-opacity duration-500 overflow-hidden">
         <div class="hero-glow blue"></div>
 
-        <p class="sf-text-body text-gray-400 mb-5 fade-in-up tracking-widest uppercase text-xs relative">Chongro Overseas Educational Institute</p>
+        <div class="max-w-[1200px] mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center relative">
+            <!-- Left: copy + track choice -->
+            <div class="text-center lg:text-left order-2 lg:order-1">
+                <p class="sf-text-body text-gray-400 mb-5 fade-in-up tracking-widest uppercase text-xs">Chongro Overseas Educational Institute</p>
 
-        <h1 class="sf-display-hero text-apple-white mb-5 fade-in-up delay-100 max-w-4xl relative">
-            수능 6등급,<br><span class="text-[#4da3ff]">호주 명문대 합격.</span>
-        </h1>
-        <p class="sf-text-body text-gray-300 max-w-xl mx-auto mb-10 fade-in-up delay-200 relative">
-            내신은 숫자일 뿐, 경로가 전부다.<br>성적과 목표를 분석해 학부·석사 두 트랙의 진학 경로를 설계합니다.
-        </p>
+                <h1 class="sf-display-hero text-apple-white mb-5 fade-in-up delay-100">
+                    수능 6등급,<br><span class="text-[#4da3ff]">호주 명문대 합격.</span>
+                </h1>
+                <p class="sf-text-body text-gray-300 max-w-xl mx-auto lg:mx-0 mb-10 fade-in-up delay-200">
+                    내신은 숫자일 뿐, 경로가 전부다.<br>성적과 목표를 분석해 학부·석사 두 트랙의 진학 경로를 설계합니다.
+                </p>
 
-        <!-- 학부 / 석사 선택 -->
-        <div class="flex flex-col sm:flex-row gap-5 fade-in-up delay-300 relative mb-10">
-            <button onclick="startConsulting('학부 (Bachelor)')" class="degree-card">
-                <div class="flex items-center justify-between mb-3">
-                    <i class="fa-solid fa-graduation-cap text-2xl text-[#2997ff]"></i>
-                    <span class="go">진단 시작 <i class="fa-solid fa-arrow-right text-xs"></i></span>
+                <!-- 학부 / 석사 선택 -->
+                <div class="flex flex-col gap-4 fade-in-up delay-300 mb-8 max-w-md mx-auto lg:mx-0">
+                    <button onclick="startConsulting('학부 (Bachelor)')" class="degree-card w-full">
+                        <div class="flex items-center justify-between mb-3">
+                            <i class="fa-solid fa-graduation-cap text-2xl text-[#2997ff]"></i>
+                            <span class="go">진단 시작 <i class="fa-solid fa-arrow-right text-xs"></i></span>
+                        </div>
+                        <h3 class="sf-display-card-bold text-white mb-1">학부 진학 (Bachelor)</h3>
+                        <p class="sf-text-caption text-gray-400">고교 졸업(예정) · 검정고시 · 대학 재학/휴학생. 디플로마·파운데이션으로 명문대 편입까지.</p>
+                    </button>
+                    <button onclick="startConsulting('석사 (Master)')" class="degree-card w-full">
+                        <div class="flex items-center justify-between mb-3">
+                            <i class="fa-solid fa-user-tie text-2xl text-[#4da3ff]"></i>
+                            <span class="go">진단 시작 <i class="fa-solid fa-arrow-right text-xs"></i></span>
+                        </div>
+                        <h3 class="sf-display-card-bold text-white mb-1">석사 진학 (Master)</h3>
+                        <p class="sf-text-caption text-gray-400">대학 졸업(예정)자 · 직장인 커리어 전환. 비전공자 GE 과정으로 전문직 면허까지.</p>
+                    </button>
                 </div>
-                <h3 class="sf-display-card-bold text-white mb-1">학부 진학 (Bachelor)</h3>
-                <p class="sf-text-caption text-gray-400">고교 졸업(예정) · 검정고시 · 대학 재학/휴학생.<br>디플로마·파운데이션으로 명문대 편입까지.</p>
-            </button>
-            <button onclick="startConsulting('석사 (Master)')" class="degree-card">
-                <div class="flex items-center justify-between mb-3">
-                    <i class="fa-solid fa-user-tie text-2xl text-[#b18cff]"></i>
-                    <span class="go">진단 시작 <i class="fa-solid fa-arrow-right text-xs"></i></span>
+
+                <p class="sf-text-caption text-gray-500 fade-in-up delay-400 mb-6">
+                    서울 본점과 시드니, 브리즈번, 멜버른 현지 지사가 유학 전 과정을 함께합니다.
+                </p>
+
+                <div class="fade-in-up delay-400">
+                    <a href="https://www.coei.com/info/consult/reserve.php" target="_blank" class="apple-link-pill">
+                        전문가 상담 예약 <i class="fa-solid fa-chevron-right text-xs ml-2"></i>
+                    </a>
                 </div>
-                <h3 class="sf-display-card-bold text-white mb-1">석사 진학 (Master)</h3>
-                <p class="sf-text-caption text-gray-400">대학 졸업(예정)자 · 직장인 커리어 전환.<br>비전공자 GE 과정으로 전문직 면허까지.</p>
-            </button>
-        </div>
+            </div>
 
-        <!-- 실제 운영 거점 -->
-        <p class="sf-text-caption text-gray-500 fade-in-up delay-400 relative mb-8">
-            서울 본점과 시드니, 브리즈번, 멜버른 현지 지사가 유학 전 과정을 함께합니다.
-        </p>
-
-        <div class="fade-in-up delay-400 relative">
-            <a href="https://www.coei.com/info/consult/reserve.php" target="_blank" class="apple-link-pill">
-                전문가 상담 예약 <i class="fa-solid fa-chevron-right text-xs ml-2"></i>
-            </a>
+            <!-- Right: Sydney photo -->
+            <div class="fade-in-up delay-200 order-1 lg:order-2">
+                <img src="images/hero-sydney.jpg" alt="시드니 하버와 오페라하우스 전경"
+                     class="rounded-2xl w-full h-56 md:h-80 lg:h-[560px] object-cover object-[70%_center] border border-white/10">
+            </div>
         </div>
     </div>
 
@@ -416,6 +426,27 @@
                         </div>
                     </div>
                 </div>
+                <!-- 실제 합격 오퍼레터 -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+                    <a href="images/offer-griffith.jpg" target="_blank" class="block group">
+                        <img src="images/offer-griffith.jpg" alt="Griffith University 약학 학사 합격 오퍼레터" class="rounded-lg border border-gray-200 shadow-sm w-full transition group-hover:shadow-md group-hover:-translate-y-0.5" loading="lazy">
+                        <p class="sf-text-caption text-gray-500 text-center mt-2">Griffith 약학</p>
+                    </a>
+                    <a href="images/offer-sydney.jpg" target="_blank" class="block group">
+                        <img src="images/offer-sydney.jpg" alt="University of Sydney Commerce 무조건부 합격 오퍼레터" class="rounded-lg border border-gray-200 shadow-sm w-full transition group-hover:shadow-md group-hover:-translate-y-0.5" loading="lazy">
+                        <p class="sf-text-caption text-gray-500 text-center mt-2">시드니대 Commerce</p>
+                    </a>
+                    <a href="images/offer-unsw.jpg" target="_blank" class="block group">
+                        <img src="images/offer-unsw.jpg" alt="UNSW College 디플로마 패키지 합격 오퍼레터" class="rounded-lg border border-gray-200 shadow-sm w-full transition group-hover:shadow-md group-hover:-translate-y-0.5" loading="lazy">
+                        <p class="sf-text-caption text-gray-500 text-center mt-2">UNSW 디플로마 패키지</p>
+                    </a>
+                    <a href="images/offer-monash.jpg" target="_blank" class="block group">
+                        <img src="images/offer-monash.jpg" alt="Monash University 미디어커뮤니케이션 합격 오퍼레터" class="rounded-lg border border-gray-200 shadow-sm w-full transition group-hover:shadow-md group-hover:-translate-y-0.5" loading="lazy">
+                        <p class="sf-text-caption text-gray-500 text-center mt-2">Monash 미디어</p>
+                    </a>
+                </div>
+                <p class="sf-text-caption text-gray-400 text-center mt-4">2026학년도에 실제 발급된 합격 오퍼레터입니다. 개인정보는 마스킹 처리했습니다.</p>
+
                 <div class="text-center mt-8">
                     <a href="https://www.coei.com/info/customer-reviews/university-cases.php?wh=5" target="_blank" class="apple-link-pill light-bg">
                         호주 합격 후기 전체 보기 <i class="fa-solid fa-chevron-right text-xs ml-2"></i>
@@ -469,7 +500,8 @@
 
         <!-- 호주 현지 지사 -->
         <div class="max-w-[980px] mx-auto mt-8">
-            <div class="info-banner p-10">
+            <img src="images/sydney-panorama.jpg" alt="시드니 하버브리지와 오페라하우스 파노라마" class="rounded-t-xl w-full h-36 md:h-48 object-cover" loading="lazy">
+            <div class="info-banner p-10" style="border-top-left-radius:0;border-top-right-radius:0;">
                 <div class="text-center md:text-left mb-8">
                     <h4 class="sf-display-card text-white mb-2">호주 현지에서도 이어지는 관리</h4>
                     <p class="sf-text-body text-gray-400">출국이 끝이 아닙니다. 시드니, 브리즈번, 멜버른 지사에서 입학 후 정착과 학업을 현지에서 지원합니다.</p>
