@@ -336,8 +336,12 @@
                 <div id="progress-bar" class="bg-apple-blue h-1 transition-all duration-500 w-0"></div>
             </div>
 
-            <div class="text-center mb-6">
+            <div class="flex items-center justify-between gap-3 mb-6">
+                <button onclick="goBack()" class="apple-link-pill light-bg shrink-0" style="padding: 6px 16px; font-size: 15px;">
+                    <i class="fa-solid fa-chevron-left text-xs mr-1"></i> 이전
+                </button>
                 <span id="track-chip" class="track-chip"><i class="fa-solid fa-graduation-cap"></i> 학부 트랙</span>
+                <span class="shrink-0" style="width: 72px;" aria-hidden="true"></span>
             </div>
 
             <!-- Question Area -->
@@ -757,6 +761,7 @@
         let userProfile = { degree: "", region: "", regionCode: "ANY", english: "", grades: "", major: "", target: "" };
         let currentStepId = "region";
         let stepCount = 1;
+        let stepHistory = []; // 뒤로가기용 스냅샷 스택 {stepId, stepCount, profile}
         const totalEstimatedSteps = 5; // 지역 → 영어 → 성적 → 전공 → 목표
 
         const questionFlow = {
@@ -852,7 +857,12 @@
         // Flow control
         // ============================================================
         function startConsulting(degreeLabel) {
-            userProfile.degree = degreeLabel;
+            // 새 진단 시작: 프로필과 히스토리 초기화
+            userProfile = { degree: degreeLabel, region: "", regionCode: "ANY", english: "", grades: "", major: "", target: "" };
+            currentStepId = "region";
+            stepCount = 1;
+            stepHistory = [];
+
             const isMaster = degreeLabel.includes('석사');
             const chip = document.getElementById('track-chip');
             chip.innerHTML = isMaster
@@ -863,6 +873,21 @@
             document.getElementById('consulting-section').classList.remove('hidden');
             document.getElementById('consulting-section').classList.add('fade-in-up');
             window.scrollTo(0, 0);
+            renderQuestion();
+        }
+
+        function goBack() {
+            if (stepHistory.length === 0) {
+                // 첫 질문에서 뒤로가기: 히어로(트랙 선택)로 복귀
+                document.getElementById('consulting-section').classList.add('hidden');
+                document.getElementById('hero-section').classList.remove('hidden');
+                window.scrollTo(0, 0);
+                return;
+            }
+            const prev = stepHistory.pop();
+            currentStepId = prev.stepId;
+            stepCount = prev.stepCount;
+            userProfile = Object.assign({}, prev.profile);
             renderQuestion();
         }
 
@@ -889,6 +914,9 @@
         }
 
         function handleAnswer(selectedOption, stateKey) {
+            // 뒤로가기용 스냅샷 저장 (값 변경 전 상태)
+            stepHistory.push({ stepId: currentStepId, stepCount: stepCount, profile: Object.assign({}, userProfile) });
+
             // Save data
             if (stateKey) {
                 userProfile[stateKey] = selectedOption.label;
